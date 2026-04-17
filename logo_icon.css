@@ -1,0 +1,59 @@
+/* LOGIN TOOLTIP + AUTH UI */
+#login { position: relative; }
+#user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+
+#user-profile:hover { background: rgba(245, 124, 0, 0.1); }
+
+
+/* Tooltip */
+#user-profile[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+#user-profile[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2937;
+    z-index: 1001;
+}
+
+
+/* Logged in state */
+#login.logged-in #user-profile i { color: #10B981 !important; }
+
+
+/* Original styles preserved */
+.login .nav-menu { display: flex; align-items: center; list-style: none; gap: 1.5rem; margin-left: auto; }
+.login .login-icon-link i { font-size: 1.5rem; color: #DC2626; transition: all 0.3s ease; cursor: pointer; padding: 5px; }
+.login .login-icon-link i:hover { color: #F59E0B; transform: scale(1.1); }
+.login .search-box-container { margin-right: 10px; }
+
+
+

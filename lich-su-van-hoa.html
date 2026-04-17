@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử & Văn Hóa Hà Nội - Go Hanoi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="minilogo vuông nền trogn suốt.png">
+    <style>
+        :root { --orange: #f57c00; --dark: #0a0a0a; --white: #ffffff; --transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { line-height: 1.6; overflow-x: hidden; color: #1a1a1a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+
+        /* Navbar */
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
+       
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--orange); text-decoration: none; }
+       
+        nav ul {
+            list-style: none; display: flex;
+            gap: 2vw; align-items: center;
+            justify-content: space-around;
+            flex: 1;
+            margin-left: 2rem;
+        }
+        nav ul li { position: relative; height: 100%; display: flex; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 15px; transition: color 0.3s; cursor: pointer; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+  nav ul li.has-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+       
+
+
+        .login { position: relative; }
+        .login a { cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+
+
+        /* Tabs */
+        .tabs-section { padding: 4rem 0; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .tab-nav { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+        .tab-btn { background: white; border: none; padding: 1rem 2rem; font-size: 1.2rem; font-weight: 600; border-radius: 50px; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative; }
+        .tab-btn.active { background: var(--orange); color: white; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(245,124,0,0.3); }
+        .tab-btn i { margin-right: 0.5rem; }
+
+
+        /* Tab Content */
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+
+        /* Hero */
+        .hero { padding: 8rem 0 4rem; text-align: center; }
+        .hero h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; margin-bottom: 1rem; }
+        .hero h1 span { color: var(--orange); }
+        .hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; color: #666; }
+
+
+        /* Timeline (both tabs) */
+        .history-list { padding: 4rem 0; }
+        .history-item { display: flex; align-items: center; opacity: 0; transform: translateY(50px); transition: var(--transition); position: relative; margin-bottom: 8rem; }
+        .history-item.reveal { opacity: 1; transform: translateY(0); }
+        .history-item:nth-child(even) { flex-direction: row-reverse; }
+        .item-number { font-size: 4rem; font-weight: 900; color: var(--orange); min-width: 120px; text-align: center; }
+        .item-text { flex: 1; padding: 3rem; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+        .item-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: #111; font-family: 'Arial', serif; }
+        .item-text p { font-size: 1.2rem; line-height: 1.8; color: #444; }
+        .item-visual { flex: 1; height: 400px; margin: 0 2rem; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+        .item-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
+.history-item.reveal .item-visual img {
+    transform: scale(1.05);
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow: 0 30px 60px rgba(245,124,0,0.3);
+}
+.history-item {
+    position: relative;
+}
+.history-item::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, var(--orange), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s ease 0.3s;
+    z-index: 1;
+}
+.history-item.reveal::before {
+    transform: scaleY(1);
+}
+.item-number {
+    background: linear-gradient(135deg, var(--orange), #ff9a3c);
+    color: white;
+    border-radius: 50%;
+    padding: 1rem;
+    font-size: 2rem;
+    box-shadow: 0 10px 30px rgba(245,124,0,0.4);
+}
+.item-text h2 {
+    position: relative;
+}
+.item-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.8s ease;
+}
+.history-item.reveal .item-text h2::after {
+    transform: scaleX(1);
+}
+
+
+        /* Footer */
+        footer { background: #1f2937; color: white; text-align: center; padding: 4rem 0 2rem; }
+        .footer-box h2 { color: var(--orange); margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 5%; font-family: Tamoha, sans-serif; border-bottom: 1px solid #ddd;">
+   
+    <div style="display: flex; align-items: center;">
+        <img src="/go1-Photoroom.png" alt="Go Hanoi" style="height: 50px;">
+    </div>
+
+
+    <nav>
+        <ul style="display: flex; list-style: none; margin: 0; padding: 0; gap: 50px;">
+            <li><a href="/trachu.html" style="text-decoration: none; color: black; font-weight: 300; font-size: 17px;" >Trang chủ</a></li>
+            <li><a href="#" style="text-decoration: none; color: rgb(241, 94, 9); font-weight: 300;font-size: 17px;">Lịch sử & Văn hóa</a></li>
+            <li><a href="/trang-dia-diem.html" style="text-decoration: none; color: black; font-weight: 300;font-size: 17px;">Địa điểm</a></li>
+            <li><a href="/ẩm thực.html" style="text-decoration: none; color: black; font-weight: 300;font-size: 17px;">Ẩm thực</a></li>
+            <li><a href="#contact" style="text-decoration: none; color: black; font-weight: 300;font-size: 17px;">Liên hệ</a></li>
+        <div style="display: flex; align-items: center; gap: 40px;">
+        <div style="border: 1px solid #ffffff; padding: 5px 10px; border-radius: 4px; display: flex; align-items: center;">
+            <input type="text" placeholder="Tìm kiếm lịch sử..." style="border: none; outline: none; width: 150px;">
+            <button style="border: none; background: none; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <li class="login" id="login">
+                      <link rel="stylesheet" href="login_icon.css">
+                      <a href="/dang-nhap-dang-ky.html" class="login" id="user-profile"> <i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i></a>
+                    </li>
+   
+        </ul>
+    </nav>
+
+
+   
+       
+                   
+
+
+</header>
+<script src="auth.js"></script>
+    <script>
+        // Navbar auth listener - Updated icon + tooltip
+        auth.onAuthStateChanged((user) => {
+          const loginLi = document.querySelector('#login');
+          const profileA = document.querySelector('#user-profile');
+         
+          if (user) {
+            // Get user data
+            const userData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {fullname: 'User'};
+           
+            // New icon + tooltip with name
+            profileA.innerHTML = '<i class="fa-solid fa-person-arrow-down-to-line" style="color: #10B981; font-size: 1.3rem;"></i>';
+            profileA.title = userData.fullname; // Tooltip name
+            profileA.href = '#';
+            profileA.onclick = (e) => {
+              e.preventDefault();
+              logoutUser().then(() => location.reload());
+            };
+            loginLi.classList.add('logged-in');
+          } else {
+            // Original logout state
+            profileA.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i>';
+            profileA.title = ''; // Remove tooltip
+            profileA.href = 'dang-nhap-dang-ky.html';
+            profileA.onclick = null;
+            loginLi.classList.remove('logged-in');
+          }
+        });
+    </script>
+
+
+    <!-- Main Content -->
+    <main>
+        <!-- Tabs -->
+        <section class="tabs-section" style="background-image: url(https://www.shutterstock.com/image-vector/outline-hanoi-vietnam-city-skyline-260nw-1797897850.jpg);">
+            <div class="container">
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="lich-su">
+                       <i class="fa-solid fa-timeline"></i> Lịch Sử
+                    </button>
+                    <button class="tab-btn" data-tab="van-hoa">
+                        <i class="fa-solid fa-palette"></i> Văn Hóa
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Lịch sử -->
+        <section id="lich-su" class="tab-pane active">
+            <section class="hero">
+                <div class="container">
+                    <h1><span><b>Thăng Long</b></span> Nghìn Năm</h1>
+                    <p>Dòng chảy lịch sử qua những cột mốc then chốt</p>
+                </div>
+            </section>
+            <div class="history-list container">
+                <div class="history-item" data-delay="0">
+                    <div class="item-number">01</div>
+                    <div class="item-text">
+                        <h2>Thành Cổ Loa – Điểm khởi đầu của tư duy quản trị và quân sự (Thế kỷ III TCN)</h2>
+                        <p>Vùng đất Hà Nội ngày nay không phải đợi đến khi nhà Lý dời đô mới trở thành trung tâm, mà từ hàng ngàn năm trước, nó đã là nơi hội tụ của người Việt cổ thuộc nền văn hóa Đông Sơn. Dấu ấn đậm nét nhất chính là thế kỷ III TCN, khi Thục Phán An Dương Vương thống nhất hai bộ tộc Âu Việt và Lạc Việt để lập nên nhà nước Âu Lạc. Thay vì ở lại vùng núi rừng Phong Châu, ông đã chọn vùng đất bằng phẳng tại Cổ Loa (Đông Anh hiện nay) để xây dựng kinh đô. Với kiến trúc hình xoáy trôn ốc độc đáo gồm ba vòng thành kiên cố kết hợp cùng hệ thống sông ngòi dày đặc, Cổ Loa không chỉ là một pháo đài quân sự bất khả xâm phạm với nỏ liên châu và mũi tên đồng, mà còn là biểu tượng cho trình độ tư duy kỹ thuật và sự tổ chức xã hội vượt bậc của người Việt sơ khai.</p>
+                    </div>
+                    <div class="item-visual">
+                        <img src="https://phapluat.tuoitrethudo.vn/stores/news_dataimages/hoangphuongduy/112023/11/07/kham-pha-thanh-co-loa-co-kinh-2023110922432520231111071617.2833190.jpg" alt="Thành Cổ Loa" title="Thành Cổ Loa">
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">02</div>
+                    <div class="item-visual">
+                       <img src="https://media.dolenglish.vn/PUBLIC/MEDIA/932751d4-f9f2-4b80-9e68-84296505a480.jpg" alt="Thời kì Bắc thuộc" title="Thời kì Bắc thuộc">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sự chuyển dịch vị trí và thời kỳ Bắc thuộc</h2>
+                        <p>Bước sang thời kỳ Bắc thuộc kéo dài hơn một thiên niên kỷ, khu vực trung tâm Hà Nội (lúc bấy giờ thường được gọi là Long Biên hay Tống Bình) trở thành mục tiêu hàng đầu của các chính quyền đô hộ phương Bắc. Các quan lại nhà Hán, nhà Tùy rồi nhà Đường đều nhận thấy đây là "yết hầu" của vùng giao thông thủy bộ, là điểm nối giữa phương Nam và phương Bắc. Từ một trị sở hành chính, vùng đất này dần biến thành một trung tâm kinh tế sầm uất với các hoạt động giao thương phát triển. Đáng chú ý, vào thế kỷ VI, sau khi khởi nghĩa thắng lợi, Lý Nam Đế đã xây dựng chùa Khai Quốc (nay là chùa Trấn Quốc) bên bờ sông Hồng, ngầm khẳng định rằng dù bị đô hộ, linh hồn và văn hóa của người Việt vẫn luôn bám rễ và phát triển mạnh mẽ tại mảnh đất này.</p>
+           
+                    </div>
+                </div>
+                <!-- Add more from current content -->
+            </div>
+             <div class="history-item" data-delay="0.2">
+                    <div class="item-number">03</div>
+                    <div class="item-visual">
+                        <img src="https://images2.thanhnien.vn/zoom/686_429/Uploaded/ngocthanh/2017_08_05/thanh-ha-noi_PBMB.jpg" alt="Thành Đại La" title="Thành Đại La">
+                    </div>
+                    <div class="item-text">
+                        <h2>Thành Đại La - Cái nôi hạ tầng cho Thăng Long</h2>
+                        <p>Giai đoạn bản lề quan trọng nhất trước năm 1010 là sự kiện Cao Biền, một viên tướng tài ba và cũng là một nhà phong thủy của nhà Đường, cho xây dựng lại thành Đại La vào năm 866. Với quy mô đồ sộ hơn hẳn các công trình trước đó, Đại La được đắp lũy cao, đào hào sâu và xây dựng hệ thống đê điều bao quanh để ngăn lũ lụt từ sông Cái (sông Hồng). Thành có chu vi rộng lớn với các lầu gác, phố xá và các cửa ô được quy hoạch rõ ràng. Dưới góc độ lịch sử, việc Cao Biền cố gắng "trấn yểm" long mạch tại đây thực chất đã vô tình xác nhận vị thế "địa linh" của mảnh đất này. Thành Đại La chính là di sản hạ tầng trực tiếp nhất mà vua Lý Thái Tổ tiếp quản sau này, là cơ sở vật chất giúp ông tự tin đưa ra quyết định dời đô, biến nơi đây thành kinh đô Thăng Long trường tồn.</p>
+                    </div>
+                </div>
+               
+            </div>
+             <div class="history-item" data-delay="0.2">
+                    <div class="item-number">04</div>
+                    <div class="item-visual">
+                        <img src="https://static1.cafeland.vn/cafelandnew/hinh-anh/2022/12/08/hoang-thanh-thang-long.png" alt="Hoàng Thành Thăng Long">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sự kiện dời đô và sự ra đời của cái tên Thăng Long</h2>
+                        <p>Mùa thu năm Canh Tuất (1010), vua Lý Thái Tổ đã thực hiện một quyết định lịch sử khi ban bố Chiếu dời đô, chuyển kinh đô từ vùng núi Hoa Lư chật hẹp về thành Đại La. Tương truyền, khi đoàn thuyền ngự vừa đến bến sông Cái, vua thấy hình ảnh rồng vàng bay lên, nên đã đổi tên thành là Thăng Long với khát vọng về một đất nước hùng cường, vươn mình mạnh mẽ. Quyết định này không chỉ thay đổi vận mệnh của một triều đại mà còn mở ra kỷ nguyên phát triển lâu dài cho vùng đất trung tâm đồng bằng Bắc Bộ, nơi được định vị là "thượng đô của kinh sư mãi muôn đời".</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">05</div>
+                    <div class="item-visual">
+                        <img src="https://statics.vinwonders.com/hoang-thanh-thang-long-ha-noi-1_1678613491.jpg" alt="Cấu trúc Tam trùng thành quách thời Lý - Trần" title="Cấu trúc Tam trùng thành quách thời Lý - Trần">
+                    </div>
+                    <div class="item-text">
+                        <h2>Cấu trúc "Tam trùng thành quách" thời Lý - Trần</h2>
+                        <p>Dưới thời Lý và Trần, Thăng Long được quy hoạch bài bản theo mô hình ba vòng thành lồng nhau, phản ánh rõ nét trật tự xã hội và tổ chức hành chính đương thời. Vòng trong cùng là Tử Cấm Thành, nơi dành riêng cho vua và hoàng tộc sinh hoạt. Bao quanh đó là Hoàng Thành (hay Long Phượng thành), nơi đặt các cơ quan triều đình và diễn ra các nghi lễ quốc gia. Vòng ngoài cùng là Kinh thành (hay La Thành), khu vực rộng lớn nhất dành cho dân chúng sinh sống, buôn bán và sản xuất thủ công nghiệp. Sự phân tách này tạo nên một cấu trúc đô thị vừa đảm bảo an ninh quân sự, vừa thúc đẩy sự giao thương nhộn nhịp ở khu vực phố thị.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">06</div>
+                    <div class="item-visual">
+                        <img src="https://www.kidsup.net/wp-content/uploads/2025/08/khang-chien-chong-quan-mong-nguyen-lan-1.jpg" alt="Kháng chiến chông Mông Nguyên" title="Kháng chiến chông Mông Nguyên">
+                    </div>
+                    <div class="item-text">
+                        <h2>Thăng Long - Pháo đài thép chống ngoại xâm</h2>
+                        <p>Thế kỷ XIII ghi dấu những trang sử hào hùng khi Thăng Long trở thành tâm điểm của ba cuộc kháng chiến chống quân xâm lược Nguyên - Mông. Với chiến lược "vườn không nhà trống", quân dân thời Trần đã chủ động rút khỏi kinh thành, để lại một "thành không nhà trống" khiến kẻ thù rơi vào thế đói khát và hoang mang. Chính từ những cuộc rút lui chiến thuật này, quân ta đã tạo đà cho các trận phản công vang dội tại Đông Bộ Đầu, Chương Dương, Hàm Tử, quét sạch quân thù ra khỏi bờ cõi. Thăng Long lúc này không chỉ là biểu tượng văn hiến mà còn là biểu tượng của tinh thần quật khởi và trí tuệ quân sự Việt Nam.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">07</div>
+                    <div class="item-visual">
+                        <img src="https://cms.vn-sightseeing.com/uploads/ha_noi_36_pho_phuong_1_8a857c2eeb.jpg" alt="Phố Cổ Hà Nội" title="Phố Cổ Hà Nội">
+                    </div>
+                    <div class="item-text">
+                        <h2>Từ Đông Kinh đến sự phồn thịnh của "36 phố phường"</h2>
+                        <p>Sau mười năm nếm mật nằm gai kháng chiến chống quân Minh, năm 1427, Lê Lợi giải phóng kinh thành và lên ngôi vào năm 1428, đổi tên Thăng Long thành Đông Kinh. Bước sang thế kỷ XVI - XVIII, dù đất nước có những biến động chính trị, Đông Kinh vẫn phát triển vượt bậc về kinh tế với danh hiệu "Thứ nhất Kinh kỳ". Đây là thời đại hình thành rõ nét hệ thống "36 phố phường" với các phường nghề thủ công tinh xảo tập trung quanh hồ Hoàn Kiếm. Sự sầm uất của các phố Hàng (Hàng Bạc, Hàng Đào, Hàng Gai...) không chỉ thu hút thương nhân trong nước mà còn hấp dẫn các thuyền buôn đến từ phương Tây và Nhật Bản, đưa Thăng Long trở thành một đô thị quốc tế thời bấy giờ.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">08</div>
+                    <div class="item-visual">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Battle_at_the_River_Tho-xuong.jpg" alt="Chiến thắng Đống Đa" title="Chiến thắng Đống Đa">
+                    </div>
+                    <div class="item-text">
+                        <h2>Chiến thắng Đống Đa và hào khí Tây Sơn</h2>
+                        <p>Cuối thế kỷ XVIII, khi 29 vạn quân Thanh xâm lược tràn vào chiếm đóng Thăng Long, người anh hùng áo vải Nguyễn Huệ (vua Quang Trung) đã thực hiện cuộc hành quân thần tốc từ Phú Xuân ra Bắc. Vào mùng 5 Tết Kỷ Dậu (1789), với lối đánh dũng mãnh và bất ngờ, nghĩa quân Tây Sơn đã đập tan các đồn lũy của địch, đỉnh cao là trận chiến tại Gò Đống Đa, khiến tướng giặc Sầm Nghi Đống phải thắt cổ tự tử. Hình ảnh vua Quang Trung trên lưng voi, áo bào sạm đen khói súng tiến vào Thăng Long giữa sự reo hò của nhân dân đã trở thành biểu tượng rực rỡ cho ý chí độc lập dân tộc trước khi lịch sử bước sang một trang mới dưới thời nhà Nguyễn.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">09</div>
+                    <div class="item-visual">
+                        <img src="https://t.cmx-cdn.com/songdep.com.vn/files/thunga/2022/01/25/vua-gia-long-va-giai-thoai-chim-hac-chi-duong-tim-dat-quy-xay-thanh-163249.jpg" alt="Vua Gia Long" title="Vua Gia Long">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sự chuyển dịch trung tâm quyền lực về Huế</h2>
+                        <p>Sau khi thống nhất đất nước vào năm 1802, vua Gia Long lên ngôi và quyết định chọn Phú Xuân (Huế) làm kinh đô cho triều đại mới. Do không còn là nơi ngự trị của thiên tử, Thăng Long bị hạ cấp xuống thành lỵ sở của trấn Bắc Thành (một đơn vị quản lý giám sát toàn miền Bắc). Để giảm bớt biểu tượng của một kinh đô cũ, nhà Nguyễn đã cho phá dỡ một phần hoàng thành Thăng Long thời Lê để xây dựng lại theo kiến trúc Vauban nhỏ hẹp hơn, đồng thời đổi tên chữ "Long" trong Thăng Long từ "Rồng" (biểu tượng nhà vua) sang "Thịnh" (hưng thịnh).</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">10</div>
+                    <div class="item-visual">
+                        <img src="https://i.ex-cdn.com/danviet.vn/files/news/2025/04/24/vua-minh-mang-nha-nguyen-la-ong-vua-thu-2-vuong-trieu-co-nhieu-vo-nhat-1216.png" alt="Vua Minh Mạng" title="Vua Minh Mạng">
+                    </div>
+                    <div class="item-text">
+                        <h2>Cuộc cải cách hành chính và tên gọi Hà Nội ra đời</h2>
+                        <p>Năm 1831, vua Minh Mạng thực hiện một cuộc cải cách hành chính quy mô lớn trên toàn quốc, xóa bỏ đơn vị cấp "trấn" và thành lập các "tỉnh". Trong đợt cải cách này, tỉnh Hà Nội chính thức được thành lập bao gồm 4 phủ và 15 huyện. Tên gọi Hà Nội được đặt dựa trên đặc điểm địa lý tự nhiên của vùng đất này: "Hà" là sông, "Nội" là bên trong. Tên gọi này phản ánh vị thế của một vùng đất được bao bọc, che chở bởi các con sông lớn, cụ thể là nằm trong vòng cung được tạo bởi sông Hồng ở phía Đông và sông Đáy ở phía Tây.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">11</div>
+                    <div class="item-visual">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Hanoi_Temple_of_Literature_%28cropped%29.jpg" alt="Văn Miếu - Quốc Tử Giám" title="Văn Miếu - Quốc Tử Giám">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sức sống của một trung tâm văn hóa và kinh tế</h2>
+                        <p>Mặc dù không còn giữ vai trò là trung tâm hành chính tối cao, Hà Nội dưới thời nhà Nguyễn vẫn duy trì vị thế là đô thị sầm uất và có sức ảnh hưởng lớn nhất miền Bắc. Văn Miếu - Quốc Tử Giám vẫn là nơi tụ hội của các sĩ tử, và các khu phố nghề truyền thống vẫn tiếp tục phát triển rực rỡ. Những người lữ hành phương Tây khi đến Hà Nội thời kỳ này vẫn không khỏi kinh ngạc trước sự tinh xảo của các mặt hàng thủ công và không khí buôn bán nhộn nhịp tại khu phố cổ, khẳng định rằng dù vị thế chính trị thay đổi, "cái thần" của kinh đô ngàn năm vẫn không hề mất đi.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">12</div>
+                    <div class="item-visual">
+                        <img src="https://36hn.wordpress.com/wp-content/uploads/2015/06/021-buc3b4n-bc3a1n-e1bb9f-che1bba3-c491e1bb93ng-xuc3a2n.jpg" alt="Hà Nội giai đoạn Pháp thuộc" title="Hà Nội giai đoạn Pháp thuộc">
+                    </div>
+                    <div class="item-text">
+                        <h2>Pháp thuộc - Quá trình xác lập chủ quyền và sự ra đời của Thành phố Hà Nội</h2>
+                        <p>Sau giai đoạn đánh chiếm và bình định từ năm 1883 đến 1888, thực dân Pháp bắt đầu thiết lập bộ máy cai trị hành chính chính thức lên vùng đất này. Dấu mốc mang tính bước ngoặt diễn ra vào ngày 19/7/1888, khi Tổng thống Pháp ký sắc lệnh thành lập "Thành phố Hà Nội" (Ville de Hanoï). Đây là sự kiện quan trọng xóa bỏ hình thái tổ chức hành chính kiểu phong kiến, biến Hà Nội từ một tỉnh lỵ của nhà Nguyễn thành một đô thị mang tính pháp lý kiểu phương Tây. Trong những năm đầu này, người Pháp tập trung phá bỏ một phần các công trình cũ quanh khu vực hồ Hoàn Kiếm để xây dựng các công sở và khu cư trú cho người Âu, đặt nền móng cho cấu trúc đô thị hiện đại.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">13</div>
+                    <div class="item-visual">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2OD901eXEf415NYm1mt-aDlZqeCvzN58dg&s" alt="Toàn quyền Paul Doumer - người tạo nên một Paris thu nhỏ giữa lòng châu Á" title="Toàn quyền Paul Doumer - người tạo nên một Paris thu nhỏ giữa lòng châu Á">
+                    </div>
+                    <div class="item-text">
+                        <h2>Vị thế Thủ đô Liên bang Đông Dương và cuộc cách mạng quy hoạch</h2>
+                        <p>Bước sang năm 1902, Hà Nội nhận được một vị thế chính trị mới đầy tham vọng khi trở thành thủ đô của toàn bộ Liên bang Đông Dương. Để tương xứng với tầm vóc trung tâm quyền lực của Pháp tại Đông Nam Á, Toàn quyền Paul Doumer đã đẩy mạnh công cuộc quy hoạch thành phố theo nguyên lý phương Tây. Các công trình biểu tượng lần lượt mọc lên như Nhà hát Lớn, Phủ Toàn quyền, và đặc biệt là cầu Long Biên – cây cầu thép đầu tiên bắc qua sông Hồng. Hệ thống đại lộ rộng lớn, bàn cờ với hàng cây xanh cùng các biệt thự kiểu Pháp đã dần thay thế những con đường nhỏ hẹp, tạo nên một "Paris thu nhỏ" giữa lòng châu Á, đồng thời làm thay đổi hoàn toàn diện mạo kiến trúc của kinh đô ngàn năm văn hiến.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">14</div>
+                    <div class="item-visual">
+                        <img src="https://galatravel.vn/Pic/Blog/nhac-ha-noi-lai-nho-vang-bong-mot-thoi-1_HasThumb.jpg" alt="Hà Nội thời Pháp thuộc" title="Hà Nội thời Pháp thuộc">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sự bùng nổ về không gian đô thị và quy mô dân số</h2>
+                        <p>Sự chuyển mình về vị thế chính trị đã kéo theo sự phát triển vượt bậc về không gian địa lý và nhân khẩu học. Khi mới thành lập năm 1888, diện tích lõi của thành phố Hà Nội chỉ vỏn vẹn khoảng 3km<sup>2</sup>, tập trung chủ yếu quanh khu phố cổ và hồ Hoàn Kiếm. Tuy nhiên, thông qua các chiến dịch lấp hồ ao, đầm lầy và mở rộng về phía Nam cũng như phía Tây, đến năm 1939, diện tích thành phố đã tăng gấp 4 lần. Cùng với đó, số lượng cư dân cũng tăng nhanh chóng, đạt mốc 30 vạn người. Sự phát triển này không chỉ mở rộng địa giới mà còn tạo ra sự phân hóa không gian rõ rệt giữa khu phố người Việt sầm uất và khu phố người Pháp hiện đại, biến Hà Nội thành đô thị sôi động nhất khu vực miền Bắc thời bấy giờ.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">15</div>
+                    <div class="item-visual">
+                        <img src="https://vn1.vdrive.vn/alohamedia.vn/2025/06/Y-nghia-lich-su-to-lon-cua-Cach-mang-thang-8.jpg" alt="Cách mạng tháng 8 thành công" title="Cách mạng tháng 8 thành công">
+                    </div>
+                    <div class="item-text">
+                        <h2>Cách mạng tháng Tám và sự khai sinh nước Việt Nam mới</h2>
+                        <p>Mùa thu năm 1945, Hà Nội trở thành ngọn cờ đầu trong phong trào giải phóng dân tộc với cuộc khởi nghĩa giành chính quyền vào ngày 19/8/1945. Khí thế cách mạng ngút trời của nhân dân Thủ đô đã tạo ra làn sóng cổ vũ mạnh mẽ cho Tổng khởi nghĩa trên phạm vi toàn quốc. Đỉnh cao của mốc son chói lọi này là ngày 2/9/1945, tại Quảng trường Ba Đình lịch sử, Chủ tịch Hồ Chí Minh đã đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt Nam Dân chủ Cộng hòa. Kể từ giây phút thiêng liêng đó, Hà Nội chính thức mang vị thế mới – Thủ đô của một quốc gia độc lập, tự do, chấm dứt gần một thế kỷ lầm than dưới ách đô hộ.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">16</div>
+                    <div class="item-visual">
+                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/f2/Toanquockhangchien.jpg" alt="Lời kêu gọi toàn quốc kháng chiến" title="Lời kêu gọi toàn quốc kháng chiến">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sáu mươi ngày đêm khói lửa và bản hùng ca kháng chiến</h2>
+                        <p>Khi thực dân Pháp quay lại xâm lược, đêm 19/12/1946, "Lời kêu gọi toàn quốc kháng chiến" của Chủ tịch Hồ Chí Minh vang lên, mở đầu cho cuộc kháng chiến trường kỳ 9 năm. Với tinh thần "Quyết tử để Tổ quốc quyết sinh", quân và dân Hà Nội đã kiên cường chiến đấu suốt 60 ngày đêm liên tục trong lòng thành phố. Những chiến lũy dựng bằng bàn ghế, sập gụ trên các con phố cổ đã giam chân quân địch, tạo điều kiện quý giá để các cơ quan Trung ương và đầu não kháng chiến rút lui an toàn về chiến khu Việt Bắc, chuẩn bị cho cuộc kháng chiến dài hơi.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">17</div>
+                    <div class="item-visual">
+                        <img src="https://sqhx-hanoi.mediacdn.vn/91579363132710912/2024/10/4/ttxvn-ha-noi-ngay-tro-ve-1-3522-1728054834908341080009.jpg" alt="Giải phóng thủ đô" title="Giải phóng thủ đô">
+                    </div>
+                    <div class="item-text">
+                        <h2>Ngày giải phóng Thủ đô 10/10/1954</h2>
+                        <p>Sau chiến thắng Điện Biên Phủ "lừng lẫy năm châu, chấn động địa cầu", thực dân Pháp buộc phải ký Hiệp định Giơ-ne-vơ và rút quân khỏi miền Bắc. Ngày 10/10/1954, cả Hà Nội rực rỡ cờ hoa chào đón đại quân ta tiến về giải phóng Thủ đô. Hình ảnh các đoàn quân chiến thắng tiến qua các cửa ô trong tiếng reo hò của hàng vạn người dân đã đánh dấu kết thúc hoàn toàn ách thống trị của chủ nghĩa thực dân Pháp, mở ra một thời kỳ mới: thời kỳ xây dựng Chủ nghĩa xã hội và trở thành hậu phương lớn cho cuộc đấu tranh thống nhất nước nhà.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">18</div>
+                    <div class="item-visual">
+                        <img src="https://baotanglichsu.vn/DataFiles/2022/12/News/Tieng%20Viet/7.12.2022/HN%20Dien%20Bien%20Phu%20tren%20khong%20-%20Ban%20hung%20ca%20bat%20diet/2.jpg" alt="Điện Biên Phủ trên không" title="Điện Biên Phủ trên không">
+                    </div>
+                    <div class="item-text">
+                        <h2>Điện Biên Phủ trên không – Đập tan huyền thoại B-52</h2>
+                        <p>Trong cuộc kháng chiến chống Mỹ cứu nước, Hà Nội một lần nữa đối mặt với thử thách khốc liệt nhất vào tháng 12/1972. Trong suốt 12 ngày đêm đêm ác liệt, quân và dân Thủ đô đã bình tĩnh, mưu trí đập tan cuộc tập kích chiến lược bằng không quân quy mô lớn nhất của đế quốc Mỹ. Trận "Điện Biên Phủ trên không" với việc bắn rơi hàng loạt "pháo đài bay" B-52 đã làm phá sản âm mưu đưa miền Bắc trở về "thời kỳ đồ đá" của đối phương. Chiến thắng lẫy lừng này không chỉ bảo vệ vững chắc Thủ đô mà còn trực tiếp buộc Mỹ phải ký Hiệp định Paris, rút quân về nước, tạo tiền đề quyết định cho đại thắng mùa Xuân năm 1975.</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="history-item" data-delay="0.2">
+                    <div class="item-number">19</div>
+                    <div class="item-visual">
+                        <img src="https://hoangthanhthanglong.vn/wp-content/uploads/2023/05/hanoi.jpg" alt="Hà Nội ngày nay" title="Hà Nội ngày nay">
+                    </div>
+                    <div class="item-text">
+                        <h2>Hà Nội từ sau Thống nhất đến nay (1975 – Nay)</h2>
+                        <p>Từ sau khi đất nước thống nhất, Hà Nội đã bước vào một giai đoạn phát triển lịch sử, khẳng định vị thế là trung tâm đầu não của cả dân tộc và không ngừng mở rộng tầm vóc ra thế giới. Dấu mốc quan trọng đầu tiên là vào tháng 7/1976, khi Quốc hội khóa VI chính thức quyết định chọn Hà Nội là Thủ đô của nước Cộng hòa Xã hội chủ nghĩa Việt Nam, đánh dấu sự hội tụ trọn vẹn của "trái tim" đất nước sau bao năm chia cắt. Trong quá trình hội nhập, với những nỗ lực gìn giữ giá trị văn hiến và xây dựng cộng đồng nhân văn, năm 1999, Hà Nội vinh dự trở thành thành phố duy nhất tại châu Á được UNESCO trao tặng danh hiệu "Thành phố vì Hòa bình". Đặc biệt, để đáp ứng yêu cầu phát triển của một siêu đô thị hiện đại, ngày 1/8/2008, Hà Nội đã thực hiện cuộc điều chỉnh địa giới hành chính lịch sử khi hợp nhất với tỉnh Hà Tây, huyện Mê Linh và một phần tỉnh Hòa Bình, giúp diện tích tăng vọt lên hơn 3.300 $km^2$ (gấp 3 lần cũ) và trở thành một trong 17 thủ đô có diện tích lớn nhất thế giới. Đỉnh cao của niềm tự hào dân tộc là vào năm 2010, khi Đại lễ kỷ niệm 1000 năm Thăng Long - Hà Nội được tổ chức trọng thể, không chỉ để tri ân tổ tiên mà còn khẳng định sức sống mãnh liệt, bền bỉ của vùng đất địa linh nhân kiệt trên con đường vươn tới tương lai.</p>
+                    </div>
+                </div>
+               
+            </div>
+           
+        </section>
+
+
+
+
+        <!-- Văn hóa -->
+        <section id="van-hoa" class="tab-pane">
+            <section class="hero">
+                <div class="container">
+                    <h1><span>Văn Hóa</span> Tràng An</h1>
+                    <p>Nét đẹp đặc trưng của người Hà Nội</p>
+                </div>
+            </section>
+            <div class="history-list container">
+                <div class="history-item" data-delay="0">
+                    <div class="item-number">01</div>
+                    <div class="item-text">
+                        <h2>Cốt cách thanh lịch: Di sản trong từng cử chỉ</h2>
+                        <p>Lối sống của người Hà Nội từ bao đời nay luôn gắn liền với tôn chỉ về sự tế nhị và trọng lễ nghĩa. "Cốt cách thanh lịch" không chỉ là một danh xưng mà là một hệ giá trị được chưng cất qua nghìn năm văn hiến, thể hiện rõ nhất qua lời ăn tiếng nói nhẹ nhàng, chuẩn mực với những tiếng "vâng", "dạ" đầy lễ phép. Người Hà Nội xưa và nay vẫn luôn giữ cho mình một phong thái ung dung, tự tại, tránh sự thô lỗ hay vội vã thái quá. Chính sự lịch thiệp trong giao tiếp và cử chỉ đã tạo nên một vẻ đẹp tinh thần riêng biệt, khiến người Tràng An luôn để lại ấn tượng về sự tinh tế và hào hoa trong mắt bạn bè quốc tế.</p>
+                    </div>
+                    <div class="item-visual">
+                        <img src="https://hnm.1cdn.vn/2021/08/26/hanoimoi.com.vn-uploads-images-phananh-2021-08-26-_tieng-ha-noi-1.jpg" alt="Người Hà Nội thanh lịch" title="Người Hà Nội thanh lịch">
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">02</div>
+                    <div class="item-visual">
+                        <img src="https://ntthnue.edu.vn/uploads/Images/2025/02/063.JPG" alt="Ẩm thực Hà Nội" title="Ẩm thực Hà Nội">
+                    </div>
+                    <div class="item-text">
+                        <h2>Văn hóa Ẩm thực: Sự cầu kỳ trong từng hương vị</h2>
+                        <p>Đối với người Hà Nội, ẩm thực không đơn thuần là để duy trì sự sống mà là một cuộc thưởng lãm nghệ thuật đầy công phu. Văn hóa ăn uống tại đây đề cao sự hài hòa của gia vị và tính mùa vụ của thực phẩm. Mỗi món ăn đều được xem như một di sản văn hóa, từ bát Phở nghi ngút khói với nước dùng trong veo, Bún chả thơm nồng hương than củi, đến sự tinh tế của Bún thang hay Chả cá Lã Vọng. Thậm chí, những thức quà nhẹ nhàng như Cốm làng Vòng gói trong lá sen hay tách Trà sen Tây Hồ được ướp kỳ công cũng phản ánh cái "gu" thưởng thức thanh cao và sự trân trọng giá trị truyền thống của người dân Thủ đô.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">03</div>
+                    <div class="item-visual">
+                        <img src="https://moitruongxaydungvn.vn/uploads/images/Thang-10/1-%20mtxd-quan%20an%20via%20he-0901023-jpg.jpg" alt="Ẩm thực vỉa hè" title="Ẩm thực vỉa hè">
+                    </div>
+                    <div class="item-text">
+                        <h2>Văn hóa Vỉa hè: Sợi dây kết nối cộng đồng bình dị</h2>
+                        <p>Bên cạnh sự đài các, lối sống Hà Nội còn mang một nét mộc mạc, gần gũi thông qua "Văn hóa vỉa hè". Những quán trà đá đơn sơ dưới bóng cây cổ thụ, những ly cà phê trứng nồng nàn trong ngõ nhỏ hay các gánh hàng rong len lỏi khắp phố phường đã tạo nên một không gian cộng đồng đặc trưng. Đây là nơi mọi tầng lớp xã hội, từ trí thức đến người lao động, có thể cùng ngồi lại để chia sẻ những câu chuyện đời thường. Chính cái không khí vỉa hè ấy đã tạo nên sự kết nối bình dị, làm cho nhịp sống đô thị trở nên mềm mại và đậm chất nhân văn hơn giữa dòng chảy hối hả của thời đại.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">04</div>
+                    <div class="item-visual">
+                        <img src="https://hoangthanhthanglong.vn/wp-content/uploads/2023/05/biatiensy.jpg" alt="Văn Miếu - Quốc Tử Giám" title="Văn Miếu - Quốc Tử Giám">
+                    </div>
+                    <div class="item-text">
+                        <h2>Tinh thần hiếu học: Trụ cột của trí tuệ nghìn năm</h2>
+                        <p>Là vùng đất "địa linh nhân kiệt", Hà Nội luôn giữ vững vị thế là một trong những trung tâm giáo dục và tri thức lớn nhất cả nước. Tinh thần hiếu học không chỉ thể hiện qua những bảng vàng tại Văn Miếu - Quốc Tử Giám mà còn thấm sâu vào nếp nghĩ của từng gia đình người Hà Nội. Việc tôn vinh các giá trị trí tuệ, trọng dụng nhân tài đã trở thành truyền thống bền vững qua nhiều thế hệ. Sự hiếu học này chính là nền tảng giúp Thủ đô không ngừng đổi mới nhưng vẫn giữ được chiều sâu văn hóa, nơi tinh thần hiếu học luôn được coi là thước đo cho sự thành đạt và phẩm giá con người.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">05</div>
+                    <div class="item-visual">
+                        <img src="https://motogo.vn/wp-content/uploads/2023/10/Chua-Mot-Cot-16.jpg" alt="Chùa Một Cột">
+                    </div>
+                    <div class="item-text">
+                        <h2>Kiến trúc Phong kiến: Uy nghiêm cốt cách Kinh kỳ</h2>
+                        <p>Hệ thống kiến trúc phong kiến tại Hà Nội là minh chứng cho tài hoa của những nghệ nhân xưa và quyền uy của các triều đại. Đặc trưng nổi bật nhất chính là những công trình uy nghiêm với hệ thống mái ngói đao cong thanh thoát, sử dụng các vật liệu tự nhiên như gỗ lim, đá và gạch Bát Tràng làm chủ đạo. Những di tích như Hoàng thành Thăng Long, Văn Miếu - Quốc Tử Giám, hay kiến trúc độc đáo của Chùa Một Cột và Đền Ngọc Sơn không chỉ là những tuyệt tác về không gian mà còn là nơi lưu giữ linh hồn, tư tưởng và triết lý sống của người Việt suốt hàng nghìn năm lịch sử.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">06</div>
+                    <div class="item-visual">
+                        <img src="https://dulichokela.com/wp-content/uploads/2023/12/kham-pha-su-quyen-ru-cua-pho-co-ha-noi.jpg" alt="Phố Cổ" title="Phố Cổ">
+                    </div>
+                    <div class="item-text">
+                        <h2>Khu phố cổ: "Hồn cốt" của đô thị làng nghề</h2>
+                        <p>Khu phố cổ, hay còn gọi là vùng "36 phố phường", mang một bản sắc kiến trúc dân dân rất riêng biệt của một đô thị thương mại truyền thống. Nơi đây đặc trưng bởi kiểu nhà ống mái ngói thâm nâu, mặt tiền hẹp nhưng chiều sâu rất lớn, nằm san sát nhau trên những con phố nhỏ uốn lượn. Mỗi tên phố như Hàng Bạc, Hàng Đào, Hàng Mã... không chỉ là địa danh mà còn là biểu tượng cho các làng nghề truyền thống tụ hội về đây. Kiến trúc phố cổ chính là sự kết hợp tài tình giữa không gian sống và không gian sản xuất, kinh doanh, tạo nên một diện mạo phố thị nhộn nhịp, ấm cúng và đầy sức sống.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">07</div>
+                    <div class="item-visual">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/04122-Hanoi_%2832954346135%29.jpg/330px-04122-Hanoi_%2832954346135%29.jpg" alt="Phủ Chủ Tịch" title="Phủ Chủ Tịch">
+                    </div>
+                    <div class="item-text">
+                        <h2>Kiến trúc thuộc địa Pháp: Bản giao hưởng lãng mạn Đông - Tây</h2>
+                        <p>Sự xuất hiện của người Pháp vào cuối thế kỷ 19 đã mang đến cho Hà Nội một luồng sinh khí mới về quy hoạch và kiến trúc. Các công trình thời kỳ này thường mang phong cách Tân cổ điển châu Âu với đặc điểm nhận diện tiêu biểu là tường vàng rực rỡ, cửa sổ chớp xanh và các đại lộ rộng lớn rợp bóng cây. Những "di sản" như Nhà hát Lớn, Phủ Chủ tịch, cầu Long Biên hay khách sạn Sofitel Metropole không chỉ tạo nên vẻ sang trọng, hào nhoáng cho Thủ đô mà còn hòa quyện một cách lạ lùng với khí hậu nhiệt đới, tạo nên một bản sắc kiến trúc Đông Dương độc đáo và quyến rũ.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">08</div>
+                    <div class="item-visual">
+                        <img src="https://statics.vinwonders.com/ho-tay-3_1687018365.jpg" alt="Hồ Tây" title="Hồ Tây">
+                    </div>
+                    <div class="item-text">
+                        <h2>Kiến trúc Đương đại: Vươn mình trong sự bảo tồn</h2>
+                        <p>Hà Nội ngày nay đang chuyển mình mạnh mẽ với những công trình đương đại, khẳng định tầm vóc của một thủ đô đang hội nhập sâu rộng. Đó là sự hiện diện của những tòa nhà chọc trời, các trung tâm thương mại lộng lẫy và những khu đô thị thông minh hiện đại với công nghệ quản lý tiên tiến. Tuy nhiên, sự phát triển này luôn song hành với ý thức bảo tồn các "lá phổi xanh" và không gian văn hóa đặc trưng. Những hồ nước biểu tượng như Hồ Gươm, Hồ Tây vẫn được giữ gìn như những khoảng lặng quý giá, giúp cân bằng giữa sự xô bồ của những khối bê tông kính thép với vẻ đẹp yên bình, xanh mát vốn có của vùng đất Thăng Long.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">09</div>
+                    <div class="item-visual">
+                        <img src="https://redsvn.net/wp-content/uploads/2020/06/shutterstock_1070309969-1200x800.jpg" alt="Múa rối nước" title="Múa rối nước">
+                    </div>
+                    <div class="item-text">
+                        <h2>Múa rối nước: Bản sắc độc đáo trên mặt nước</h2>
+                        <p>Múa rối nước là một loại hình nghệ thuật biểu diễn độc nhất vô nhị, ra đời từ những làng quê vùng đồng bằng Bắc Bộ và kết tinh rực rỡ tại Thăng Long. Với sân đình là mặt nước, các nghệ nhân đứng sau bức màn mây điều khiển những con rối gỗ sơn son thiếp vàng bằng hệ thống sào và dây phức tạp. Các tích trò thường tái hiện sinh động đời sống nông nghiệp như cày cấy, chăn vịt, hay các truyền thuyết lịch sử hào hùng như sự tích vua Lê Lợi trả gươm thần, tạo nên một không gian nghệ thuật vừa huyền ảo, vừa gần gũi với tâm hồn dân tộc.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">10</div>
+                    <div class="item-visual">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Ca_tr%C3%B9.jpg" alt="ca Trù">
+                    </div>
+                    <div class="item-text">
+                        <h2>Hát Ca trù và Hát Xẩm: Tiếng lòng nhân thế</h2>
+                        <p>Hà Nội là trung tâm hội tụ của những làn điệu dân ca đặc sắc, từ bác học đến bình dân. Hát Ca trù (hát ả đào) là loại hình nghệ thuật diễn xướng hàn lâm, kết hợp giữa thơ ca tinh tế và âm nhạc điêu luyện, đòi hỏi người hát phải có kỹ thuật nảy hạt, đổ hột vô cùng khó. Ngược lại, Hát Xẩm lại mang hơi thở của đời sống đô thị lao động; xưa kia thường vang lên tại bến tàu, xe điện hay các góc phố, dùng âm nhạc để kể lại những câu chuyện thế sự bằng lối hát mộc mạc, đậm chất tự sự và giàu lòng trắc ẩn.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">11</div>
+                    <div class="item-visual">
+                        <img src="https://nongthonvaphattrien.vn/uploads/images/2023/10/25/tranh-tet-hang-trong-tu-binh-to-nu-1698218498.jpg" alt="Tranh dân gian Hàng Trống" title="Tranh dân gian Hàng Trống">
+                    </div>
+                    <div class="item-text">
+                        <h2>Tranh dân gian Hàng Trống: Đỉnh cao nghệ thuật thị dân</h2>
+                        <p>Dòng tranh Hàng Trống là một biểu tượng thẩm mỹ tiêu biểu của tầng lớp thị dân Hà Nội xưa. Điểm đặc trưng lớn nhất của dòng tranh này là kỹ thuật "vờn màu" bằng bút lông vô cùng tỉ mỉ, tạo nên độ đậm nhạt và chiều sâu cho hình ảnh. Những tác phẩm kinh điển như Ngũ Hổ, Lý Ngư Vọng Nguyệt (Cá chép trông trăng) hay các bộ tranh thờ không chỉ thể hiện kỹ thuật đồ họa điêu luyện mà còn phản ánh thế giới quan tâm linh sống động và ước vọng về một cuộc sống bình an, thịnh vượng của người dân Kinh kỳ.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">12</div>
+                    <div class="item-visual">
+                        <img src="https://hnm.1cdn.vn/2025/11/14/f65a255838/lien-hoan-tuong-2022.jpg" alt="Liên hoan tuồng và dân ca kịch toàn quốc – 2025 diễn ra tại Hà Nội" title="Liên hoan tuồng và dân ca kịch toàn quốc – 2025 diễn ra tại Hà Nội">
+                    </div>
+                    <div class="item-text">
+                        <h2>Sân khấu Chèo và Tuồng: Bài học giáo dục qua lời ca</h2>
+                        <p>Sân khấu truyền thống tại Hà Nội luôn là nơi gửi gắm những giá trị đạo lý và nhân sinh sâu sắc. Nếu Chèo mang tính quần chúng, vui tươi với các vở diễn ca ngợi tình yêu, lòng thủy chung và những nhân vật hề chèo thông minh, sắc sảo; thì Tuồng lại mang vẻ uy nghi, mẫu mực với các điển tích về lòng trung quân ái quốc. Lối hóa trang đặc trưng cùng các động tác biểu hình tượng trưng trên sân khấu không chỉ mang lại sự mãn nhãn về thị giác mà còn là cách người xưa dạy dỗ con cháu về lẽ phải và cái tâm trong sáng.</p>
+                    </div>
+                </div>
+                <div class="history-item" data-delay="0.2">
+                    <div class="item-number">13</div>
+                    <div class="item-visual">
+                        <img src="https://bizweb.dktcdn.net/100/349/716/files/lang-gom-bat-trang-1.jpg?v=1710495850287" alt="Làng gốm Bát Tràng" title="Làng gốm Bát Tràng">
+                    </div>
+                    <div class="item-text">
+                        <h2>Nghệ thuật Thủ công mỹ nghệ: Tinh hoa làng nghề Hà thành</h2>
+                        <p>Vẻ đẹp nghệ thuật của Hà Nội còn lan tỏa qua đôi bàn tay tài hoa của các nghệ nhân từ những làng nghề thủ công danh tiếng bao quanh Thủ đô. Sự tinh xảo của Gốm Bát Tràng, vẻ mịn màng óng ả của Lụa Vạn Phúc, hay nét chạm khắc uy nghiêm của Đúc đồng Ngũ Xã là minh chứng cho trí tuệ và sự kiên trì của con người. Những sản phẩm này không chỉ là vật dụng thường ngày mà đã trở thành các tác phẩm nghệ thuật có giá trị xuất khẩu cao, góp phần khẳng định vị thế của Hà Nội như một trung tâm hội tụ tinh hoa làng nghề của cả nước.</p>
+                    </div>
+                </div>
+               
+            </div>
+        </section>
+    </main>
+
+
+     <!-- FOOTER -->
+    <footer class="footer" id="footer">
+      <link rel="stylesheet" href="footer.css">
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-col">
+                <h3 class="footer-title">Go Hanoi</h3>
+                <p>Đồng hành cùng bạn khám phá vẻ đẹp Hà Nội đích thực.</p>
+                <div class="social-icons">
+                    <a href="#" class="icon-fb"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon-ins"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="icon-ytb"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="icon-tk"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+
+            <div class="footer-col" id="contact">
+                <h3 class="footer-title">Liên Hệ</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> 024 123 4567</li>
+                    <li><i class="fas fa-envelope"></i> gohanoi@gmail.vn</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 36 Hàng Bạc, Hoàn Kiếm, Hà Nội</li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h3 class="footer-title">Đăng Ký Nhận Tin</h3>
+                <p>Cập nhật thông tin và nhận ưu đãi sớm nhất!</p>
+                <form class="subscribe-form" id="subscribeForm" >
+                    <input type="email" placeholder="Email của bạn" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+                <div id="successMessage" style="display: none; color: #4CAF50; margin-top: 10px; font-weight: bold; font-size: 14px;">
+                     <i class="fas fa-check-circle"></i> Đã đăng ký thành công!
+                </div>
+            </div>
+          </div>
+        <hr class="footer-divider">
+
+
+        <div class="footer-bottom">
+          <script src="/footerscript.js" defer></script>
+            <p class="copyright">© 2026 Go Hanoi. Tất cả quyền được bảo lưu.</p>
+            <div class="bottom-links" id="phanhoi">
+                <a href="mailto:gohanoi@gmail.vn?subject=Phản hồi từ khách hàng&body=Xin chào Go Hanoi, tôi có góp ý sau:">Phản hồi</a>
+                <a href="https://drive.google.com/file/d/1pEXiyZ1J0VpqkL7Y8cqW2OwWvWpoGN-C/view" target="_blank">Điều khoản</a></div></div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script>
+// TAB-SYNC SEARCH PERFECT - Lịch sử ↔ Văn hóa
+document.addEventListener('DOMContentLoaded', function() {
+    const navbarInput = document.querySelector('header input[placeholder*="Tìm kiếm"]');
+    const navbarBtn = document.querySelector('header button');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+   
+    if (!navbarInput || !navbarBtn || !tabBtns.length) return;
+   
+    // Tab switch + Update placeholder
+    function switchTab(btn) {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+       
+        btn.classList.add('active');
+document.getElementById(btn.dataset.tab).classList.add('active');
+       
+        // Update placeholder
+        navbarInput.placeholder = btn.dataset.tab === 'lich-su'
+            ? ' Tìm kiếm lịch sử...'
+            : ' Tìm kiếm văn hóa...';
+    }
+   
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn));
+    });
+   
+    // Initial setup
+    switchTab(document.querySelector('.tab-btn.active'));
+   
+    // Smart search - Active tab only
+    function searchCurrentTab() {
+        const query = navbarInput.value.toLowerCase().trim();
+        if (!query) return;
+       
+        const activePane = document.querySelector('.tab-pane.active');
+        const items = activePane.querySelectorAll('.item-text h2, .history-item p');
+       
+        for (let item of items) {
+            if (item.textContent.toLowerCase().includes(query)) {
+                item.closest('.history-item').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                navbarInput.value = '';
+                return;
+            }
+        }
+       
+        // No match → scroll to first item
+        activePane.querySelector('.history-item')?.scrollIntoView({
+            behavior: 'smooth'
+        });
+        navbarInput.value = '';
+    }
+   
+    navbarBtn.onclick = searchCurrentTab;
+navbarInput.onkeypress = function(e) { if (e.key === 'Enter') searchCurrentTab(); };
+});
+
+
+   
+   
+    </script>
+    <script src="lich-su-van-hoa.js"></script>
+</body>
+</html>
+
+
+

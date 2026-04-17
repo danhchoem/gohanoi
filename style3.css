@@ -1,0 +1,33 @@
+<style>
+        /* Container để căn giữa màn hình (tùy chọn) */
+        .us .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+
+
+        }
+
+
+        /* Thành phần chính */
+        .us .gradient-text {
+            /* Kích thước chữ */
+            font-size: 60px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+           
+            /* Dải màu Gradient */
+            background: linear-gradient(to right, #ff3b2f, #ff954f);
+           
+            /* Cắt nền theo chữ và làm màu chữ trong suốt */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+           
+            /* Tùy chỉnh căn giữa */
+            text-align: center;
+            margin: 0;
+        }
+    </style>
+

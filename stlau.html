@@ -1,0 +1,114 @@
+<style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+
+        /* Header của từng mục */
+        .accordion-item {
+            border-bottom: 1px solid #dadce0;
+        }
+
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            font-weight: 500;
+            color: #202124;
+            cursor: pointer;
+            background: #fff;
+            transition: background 0.3s;
+            user-select: none;
+        }
+
+
+        .accordion-header:hover {
+            background-color: #f1f3f4;
+        }
+
+
+        /* Khi mục đó đang mở */
+        .accordion-item.active .accordion-header {
+            color: #000000;
+            background-color: #fa9755;
+        }
+
+
+        /* Mũi tên */
+        .arrow {
+            border: solid #5f6368;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            transition: transform 0.3s;
+        }
+
+
+        .accordion-item.active .arrow {
+            transform: rotate(-135deg);
+            border-color: #276cf7;
+        }
+
+
+        /* Phần nội dung chi tiết */
+        .content-wrapper {
+            max-height: 0; /* Mặc định đóng */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out; /* Tạo hiệu ứng cuộn */
+            background-color: #e8f0fe;
+        }
+
+
+        .content-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .content-item {
+            padding: 12px 60px;
+            color: #3c4043;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+
+        .content-item:hover {
+            background-color: #f1f1f3;
+        }
+
+
+        .content-item.selected {
+            background-color: #ffffff;
+            font-weight: 500;
+        }
+    </style>
+
+
+

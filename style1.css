@@ -1,0 +1,65 @@
+<style>
+        /* Container để căn giữa màn hình (tùy chọn) */
+    .gioithieu .container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+        .gioithieu .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 10vh;
+            background-color: #ffffff;
+        }
+
+
+        /* Thành phần chính */
+        .gioithieu .gradient-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+            /* Kích thước */
+            width: 250px;
+            height: 100px;
+           
+            /* Bo tròn cực đại để tạo hình viên thuốc (capsule) */
+            border-radius: 50px;
+           
+            /* Màu Gradient từ đỏ sang cam */
+            background: linear-gradient(to right, #ff3b2f, #ff954f);
+           
+            /* Chữ bên trong */
+            color: rgb(255, 255, 255);
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+           
+            /* Đường kẻ hai bên (như trong ảnh) */
+            position: relative;
+        }
+
+
+        /* Tạo hai đường kẻ hai bên bằng pseudo-elements */
+        .gioithieu .gradient-box::before,
+        .gioithieu .gradient-box::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 800px; /* Độ dài đường kẻ */
+            height: 2px;
+            background: linear-gradient(to right, #ff3b2f, #ff954f);
+        }
+
+
+        .gioithieu .gradient-box::before {
+            right: 100%; /* Đặt bên trái */
+        }
+
+
+        .gioithieu .gradient-box::after {
+            left: 100%; /* Đặt bên phải */
+        }
+    </style>
+

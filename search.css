@@ -1,0 +1,64 @@
+/* Container bọc ngoài */
+.search-wrapper .search-box-container {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Khung viền thanh tìm kiếm */
+.search-wrapper .search .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #e4e0e0; /* Màu xám nhạt trung tính */
+    border: 1.5px solid transparent;
+    border-radius: 60px; /* Bo tròn mạnh */
+    padding: 4px 15px;
+    transition: all 0.3s ease;
+    width: 100px; /* Độ rộng vừa phải */
+}
+
+
+/* Hiệu ứng khi nhấn vào ô tìm kiếm */
+.search-wrapper .search-wrapper:focus-within {
+    background-color: #ffffff;
+    border-color: #ff4d00; /* Màu cam giống màu nhấn của Go Hanoi */
+    box-shadow: 0 0 8px rgba(255, 77, 0, 0.2);
+    width: 280px; /* Tự động dài ra một chút khi gõ */
+}
+
+
+/* Ô nhập liệu */
+.search-wrapper .search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 85%;
+    padding: 8px 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.search-wrapper .search-input::placeholder {
+    color: #999;
+}
+
+
+/* Nút tìm kiếm (Icon) */
+.search-wrapper .search-submit {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 2px;
+    transition: color 0.3s;
+}
+
+
+.search-wrapper .search-submit:hover {
+    color: #ff4d00;
+}
+

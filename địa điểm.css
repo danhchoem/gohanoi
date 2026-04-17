@@ -1,0 +1,79 @@
+.location-grid-container {
+    display: grid;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+    padding: 20px;
+   
+    /* Định nghĩa khuôn mẫu 2 cột - 2 dòng */
+    grid-template-areas:
+        "big small1"
+        "big small2";
+    grid-template-columns: 1.8fr 1fr; /* Cột trái rộng hơn cột phải */
+    grid-template-rows: 300px 300px; /* Độ cao cố định cho mỗi dòng */
+}
+
+
+/* Gán từng item vào vị trí tương ứng trong khuôn */
+.item-ho-guom { grid-area: big; }
+.item-lang-bac { grid-area: small1; }
+.item-van-mieu { grid-area: big; /* Nếu bạn muốn Văn Miếu nằm dưới Hồ Gươm thì sửa lại template */ }
+
+
+/* Để giống hệt ảnh mẫu của bạn nhất: */
+.location-grid-container {
+    grid-template-areas:
+        "ho-guom lang-bac"
+        "van-mieu discover";
+}
+.item-ho-guom   { grid-area: ho-guom; }
+.item-lang-bac  { grid-area: lang-bac; }
+.item-van-mieu  { grid-area: van-mieu; }
+.item-discover  { grid-area: discover; }
+
+
+/* CSS làm đẹp thẻ */
+.grid-item {
+    position: relative;
+    border-radius: 25px; /* Bo góc cực mạnh như ảnh mẫu */
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(50, 50, 50, 0.1);
+}
+
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+}
+
+
+.item-discover {
+    background: linear-gradient(135deg, #FF8C00 0%, #FF4500 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+
+.location-tag {
+    padding: 5px 15px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+.tag-orange { background: #FF8C00; }
+.tag-blue   { background: #2d98da; }
+.tag-red    { background: #eb3b5a; }
+

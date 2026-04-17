@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "go-hanoi"
+  },
+  "targets": {},
+  "etags": {}
+}
+

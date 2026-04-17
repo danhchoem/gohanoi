@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ẩm Thực Hà Nội - Khám Phá 15 Món Ngon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="/minilogo vuông nền trogn suốt.png">
+    <style>
+        :root {
+            --bg-main: #f4f6f9;
+            --bg-card: #ffffff;
+            --text-dark: #2d3436;
+            --text-gray: #636e72;
+            --primary: #ff6b00;
+            --gradient-orange: linear-gradient(135deg, #ff4e00, #ffb000);
+            --modal-bg: #222222;
+            --modal-text: #cccccc;
+            --modal-title: #ff8c00;
+        }
+
+
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+
+
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+
+
+
+        header {
+            background: var(--bg-card);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+
+
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            background: var(--gradient-orange);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+
+
+
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+
+
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+        }
+
+
+
+
+        .section-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+
+
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+
+
+        .section-title span {
+            background: var(--gradient-orange);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+
+
+        .destinations-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+
+
+
+        .dest-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+            gap: 40px;
+        }
+
+
+
+
+        .dest-item:nth-child(even) {
+            flex-direction: row-reverse;
+            gap: 40px;
+        }
+
+
+
+
+        .dest-image-wrap {
+            flex: 0 0 50%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+
+
+
+        .dest-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+
+
+
+        .dest-item:hover .dest-image-wrap img {
+            transform: scale(1.05);
+        }
+
+
+
+
+        .dest-content {
+            flex: 1;
+            background: var(--bg-card);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+            z-index: 2;
+            position: relative;
+            margin: 0 40px;
+        }
+
+
+
+
+        .dest-content {
+            width: 45%;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+            z-index: 2;
+            position: relative;
+        }
+
+
+
+
+        .dest-item:nth-child(odd) .dest-content {
+            margin-left: -10%;
+        }
+
+
+
+
+        .dest-item:nth-child(even) .dest-content {
+            margin-right: -10%;
+        }
+
+
+
+
+        .dest-index {
+            font-size: 60px;
+            font-weight: 800;
+            color: rgba(255, 107, 0, 0.1);
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            line-height: 1;
+            z-index: -1;
+        }
+
+
+
+
+        .dest-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+
+
+
+        .dest-excerpt {
+            font-size: 15px;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+            box-orient: vertical;
+            overflow: hidden;
+        }
+
+
+
+
+        .dish-review-item {
+            background: rgba(255,107,0,0.1);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .dish-review-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .dish-review-date {
+            color: var(--text-gray);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+
+
+
+        .read-more-btn {
+            padding: 12px 30px;
+            background: var(--bg-main);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+
+
+        .read-more-btn:hover {
+            background: var(--gradient-orange);
+            color: var(--bg-card);
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.2);
+        }
+
+
+
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+
+
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+
+        .modal-window {
+            display: flex;
+            width: 95%;
+            max-width: 1200px;
+            max-height: 90vh;
+            background: var(--modal-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+
+
+
+        .modal-overlay.active .modal-window {
+            transform: translateY(0);
+        }
+
+
+
+
+        .modal-image {
+            flex: 0 0 45%;
+            min-width: 450px;
+            position: relative;
+        }
+
+
+
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+
+
+        .modal-content {
+            flex: 1;
+            padding: 50px 50px 50px 40px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+
+
+
+        .modal-title {
+            color: var(--modal-title);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+
+
+
+        .modal-body {
+            flex: 1;
+            color: var(--modal-text);
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+
+
+
+        .modal-body p {
+            margin-bottom: 20px;
+        }
+
+
+
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+
+
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+
+
+
+        .modal-body::-webkit-scrollbar { width: 5px; }
+        .modal-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .modal-body::-webkit-scrollbar-thumb { background: #555; border-radius: 10px; }
+        .modal-body::-webkit-scrollbar-thumb:hover { background: var(--modal-title); }
+
+
+
+
+        @media (max-width: 900px) {
+            nav ul { display: none; }
+       
+            .destinations-container {
+                gap: 50px;
+            }
+
+
+
+
+            .dest-item, .dest-item:nth-child(even) {
+                flex-direction: column;
+            }
+
+
+
+
+            .dest-image-wrap {
+                width: 100%;
+                height: 300px;
+            }
+
+
+
+
+            .dest-content {
+                width: 90%;
+                margin: -50px auto 0 !important;
+                padding: 30px 20px;
+            }
+
+
+
+
+            .dest-name { font-size: 24px; }
+
+
+
+
+            .modal-window {
+                flex-direction: column;
+                height: 90vh;
+            }
+
+
+
+
+            .modal-image {
+                flex: none;
+                height: 35%;
+            }
+
+
+
+
+            .modal-content {
+                flex: 1;
+                padding: 25px 20px;
+            }
+
+
+
+
+            .modal-title { font-size: 24px; margin-bottom: 15px; }
+           
+            .close-modal {
+                top: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.5);
+                border: none;
+            }
+        }
+        .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+/* FOOTER */
+.footer {
+  background: #1F2937;
+  color: white;
+  padding: 4rem 0 2rem;
+}
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #F59E0B;
+}
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.social-links a {
+  width: 50px;
+  height: 50px;
+  background: #DC2626;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.social-links a:hover {
+  background: #F59E0B;
+  transform: translateY(-3px);
+}
+.newsletter {
+  display: flex;
+  gap: 0.5rem;
+}
+.newsletter input {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 30px;
+  padding-left: 1rem;
+}
+.newsletter button {
+  background: #DC2626;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.newsletter button:hover {
+  background: #B91C1C;
+}
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #374151;
+  opacity: 0.8;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+    <header>
+       <div class="container" id="logo">
+                 <img src="/go1-Photoroom.png " height="50px" alt="Go Hanoi" style="margin-left: -150px;">
+                </div>
+        <nav>
+            <ul>
+                <li><a href="/trachu.html">Trang chủ</a></li>
+                <li><a href="/lich-su-van-hoa.html">Lịch sử & Văn hóa</a></li>
+                <li><a href="/trang-dia-diem.html">Địa điểm</a></li>
+                <li><a href="#" class="active">Ẩm thực</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+                <li class="login" id="login">
+                      <link rel="stylesheet" href="login_icon.css">
+                      <a href="/dang-nhap-dang-ky.html" class="login"> <i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i></a>
+                    </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+<div class="section-header">
+        <h2 class="section-title">Ẩm Thực Nổi Tiếng <span>Tại Hà Nội</span></h2>
+       
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm món ăn..." />
+            <button id="searchBtn">Tìm kiếm</button>
+        </div>
+    </div>
+
+
+
+
+    <style>
+        /* Search Styles */
+        .search-container {
+            max-width: 600px;
+            margin: 40px auto;
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+        #searchInput {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 30px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: var(--bg-card);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        #searchInput:focus {
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(255,107,0,0.15);
+        }
+        #searchBtn {
+            padding: 15px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        #searchBtn:hover {
+            background: var(--gradient-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255,107,0,0.3);
+        }
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-gray);
+            font-size: 18px;
+        }
+        .dest-item.hidden {
+            display: none;
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <div class="destinations-container" id="destinations-list"></div>
+
+
+
+
+    <!-- General Reviews Section -->
+    <section class="reviews-section" id="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Đánh Giá Chung <span>Về Ẩm Thực Hà Nội</span></h2>
+                <p class="section-subtitle">Ẩm thực Hà Nội là sự kết hợp hoàn hảo giữa tinh tế và dân dã, nơi mỗi món ăn đều mang hồn cốt của phố cổ, từ phở thơm lừng đến cốm xanh ngọt ngào. Hãy chia sẻ cảm nhận của bạn!</p>
+            </div>
+           
+            <div class="reviews-container">
+                <div class="add-review">
+                    <textarea id="generalReviewText" placeholder="Viết cảm nhận của bạn về ẩm thực Hà Nội..." rows="4"></textarea>
+                    <button id="submitReviewBtn" class="submit-review-btn">Gửi Đánh Giá</button>
+                </div>
+               
+                <div id="generalReviewsList" class="reviews-list"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <style>
+        .reviews-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 20px auto 60px;
+            line-height: 1.6;
+        }
+       
+        .reviews-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+       
+        .add-review {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            margin-bottom: 50px;
+        }
+       
+        #generalReviewText {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 20px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+       
+        #generalReviewText:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+        }
+       
+        .submit-review-btn {
+            padding: 15px 40px;
+            background: var(--gradient-orange);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+       
+        .submit-review-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255,107,0,0.4);
+        }
+       
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+       
+        .review-item {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary);
+        }
+       
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+       
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+       
+        .review-meta h4 {
+            margin: 0 0 5px 0;
+            color: var(--text-dark);
+        }
+       
+        .review-date {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+       
+        .review-text {
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+       
+        .no-reviews {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 18px;
+            padding: 60px 20px;
+        }
+       
+        @media (max-width: 900px) {
+            .reviews-section {
+                padding: 60px 5%;
+            }
+           
+            .add-review {
+                padding: 30px 20px;
+            }
+           
+            #generalReviewText {
+                padding: 15px;
+            }
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-window">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="Chi tiết">
+            </div>
+            <div class="modal-content">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+const foodData = [
+             {
+                title: "Phở Hà Nội",
+                desc: "<p>Trải qua bao năm tháng, giữa nhịp sống đổi thay không ngừng, phở Hà Nội vẫn bền bỉ giữ nguyên hương vị tinh tế và trở thành một biểu tượng ẩm thực khó thay thế, chinh phục thực khách không chỉ bằng sự ngon miệng mà còn bằng chiều sâu văn hóa ẩn chứa trong từng bát phở. Một tô phở tưởng chừng giản dị với bánh phở trắng mềm, thịt bò tươi, hành lá, hành tây và rau thơm nhưng lại là kết tinh của sự khéo léo và kinh nghiệm lâu đời, đặc biệt nằm ở phần nước dùng trong vắt, ngọt thanh được ninh từ xương bò trong nhiều giờ, hòa quyện cùng hương quế, hồi và gừng nướng tạo nên mùi thơm rất riêng. Sợi phở phải vừa mềm vừa dai, không nát, thịt bò phải tươi và được thái mỏng tinh tế, tất cả kết hợp hài hòa tạo nên một tổng thể hoàn chỉnh. Khi thêm chút chanh, giấm tỏi ớt hay rắc nhẹ hạt tiêu theo khẩu vị, hương vị phở lại càng trở nên đậm đà và sống động hơn. Từ những gánh hàng rong nơi phố cổ, phở đã dần vượt ra khỏi phạm vi Hà Nội để trở thành niềm tự hào của ẩm thực Việt Nam trên bản đồ thế giới, là món ăn không chỉ để thưởng thức mà còn để cảm nhận, để nhớ và để gợi lên những ký ức rất riêng về một Hà Nội thanh lịch và sâu lắng.</p>",
+                locations: [
+                    "📍 Phở Oanh: ngõ Thọ Xương, mở từ khoảng 6h, luôn đông khách, đặc biệt cuối tuần thường quá tải. Phở nổi bật với bánh sợi nhỏ, thịt bò mềm, nước dùng bí truyền, giá khoảng 40.000 – 60.000 VND/bát.",
+                    "📍 Phở gà Ánh: 42 Hàng Đào, quán nằm trong ngõ nhỏ, không gian hạn chế (tối đa ~ 15 khách/lượt), mở chủ yếu buổi trưa từ thứ 2 đến thứ 7. Món nổi bật là phở gà trộn, giá khoảng 40.000 VND/bát.",
+                    "📍 Phở bưng Hàng Trống: số 8 Hàng Trống (trong ngõ, lên tầng 2), không gian nhỏ, khách tự bưng bát khi ăn, mở từ 15h đến 21h – 22h. Chỉ bán phở bò chín với nước dùng thanh, thịt mềm, giá khoảng 40.000 – 60.000 VND/bát.",
+                    "📍 Phở gà chấm: phố Nhà Chung (Hoàn Kiếm, Hà Nội), nằm trong ngõ sâu, nổi tiếng với kiểu ăn phở chấm độc đáo gồm bánh phở, thịt gà và nước chấm đặc biệt. Giá khoảng 30.000 – 40.000 VND/suất."
+                ],
+                img: "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/12/21/1438849/Pho-Bo.jpg"
+            },
+            {
+                title: "Bún Thang",
+                desc: "<p>Ẩm thực Hà Nội từ lâu được xem là nơi hội tụ tinh hoa của nhiều vùng miền, và bún thang chính là một trong những món ăn tiêu biểu cho sự tinh tế, cầu kỳ ấy. Không chỉ đơn thuần là món ăn, bún thang còn được ví như một bức tranh ẩm thực với sự hài hòa giữa hương vị và màu sắc, từ sắc vàng của trứng tráng, trắng của thịt gà xé, hồng của giò lụa đến xanh của rau răm, tất cả nổi bật trên nền bún trắng tinh. Điểm làm nên linh hồn của món ăn nằm ở nước dùng được ninh công phu từ gà và tôm, trong vắt, ngọt thanh và đậm đà. Gắn liền với quá trình gìn giữ và phát triển món ăn là nghệ nhân Đàm Thị Ẩm, người đã góp phần đưa bún thang trở thành nét đặc trưng của Hà Nội qua nhiều thế hệ. Dù trải qua những giai đoạn thăng trầm, bún thang vẫn giữ được vị thế riêng nhờ sự cầu kỳ trong chế biến và sự tinh tế trong thưởng thức, để rồi ngày nay, món ăn ấy không chỉ là đặc sản mà còn là biểu tượng cho phong cách ẩm thực thanh lịch, sành ăn của người Hà Nội.</p>",
+                locations: [
+                    "📍 Bún thang Hàng Hòm: 11 Hàng Hòm, Hoàn Kiếm, quán nằm giữa phố cổ, nổi tiếng với bún thang đầy đặn gồm thịt gà, trứng, nấm hương, củ cải dầm, nước dùng ngọt thanh từ xương gà, giá khoảng 30.000 – 35.000 VNĐ/bát.",
+                    "📍 Một Buổi Sáng: 86 Hai Bà Trưng, Cửa Nam, quán mới nổi với không gian rộng rãi, hiện đại, bún thang làm từ nguyên liệu tươi, ngoài ra còn có xôi, mì gà, đồ uống, mở cửa từ 7h00 – 21h00, giá khoảng 35.000 – 75.000 VNĐ.",
+                    "📍 Bún thang Bà Đức: 48 Cầu Gỗ, Hoàn Kiếm, quán lâu năm giữ hương vị truyền thống, luôn đông khách, mở từ 16h00 – 23h15 (CN đến 22h00), giá khoảng 30.000 – 55.000 VNĐ/bát.",
+                    "📍 Bún thang Hàng Hành: 29 Hàng Hành, Hoàn Kiếm, quán nhỏ, giản dị nhưng chuẩn vị Hà Nội, giá hợp lý, mở từ 6h00 – 14h00, giá khoảng 40.000 VNĐ/bát."
+                ],
+                img: "https://cloudcdnvod.tek4tv.vn/MAM/attach/upload/11072024121335/121340_bunthang.jpg"
+            },
+            {
+                title: "Bún riêu",
+                desc: "<p>Giữa kho tàng ẩm thực phong phú của Hà Nội, bún riêu nổi bật như một món ăn dân dã nhưng đầy sức cuốn hút, đặc biệt hấp dẫn nhất vào mùa cua đồng từ tháng 5 đến tháng 7 âm lịch khi nguyên liệu đạt độ tươi ngon trọn vẹn. Linh hồn của món ăn nằm ở riêu cua và nước dùng được nấu công phu, dậy lên hương thơm đặc trưng cùng vị chua thanh nhẹ từ giấm bỗng, tạo cảm giác thanh mát rất phù hợp với những ngày hè. Một bát bún riêu Hà Thành đúng điệu không thể thiếu màu đỏ của cà chua, lớp gạch cua óng ánh, điểm xuyết rau sống xanh mát như diếp ngô, kinh giới, rau răm, tất cả hòa quyện tạo nên sự cân bằng hoàn hảo giữa hương và sắc. Khi thưởng thức, chỉ cần thêm chút mắm tôm hay ớt chưng là hương vị như được nâng lên một tầng mới, đậm đà mà vẫn giữ được nét thanh tao vốn có. Dù giản dị trong cách chế biến, bún riêu vẫn mang trong mình nét cổ kính, gần gũi và trở thành một phần ký ức ẩm thực khó quên của người Hà Nội, đúng như lời nhà văn Vũ Bằng từng say mê miêu tả về sức hấp dẫn không thể chối từ của món ăn này.</p>",
+                locations: [
+                    "📍 Bún riêu cua Cầu Gỗ: 42 Cầu Gỗ, Hàng Bạc, Hoàn Kiếm, quán nổi tiếng phố cổ với nước dùng đậm đà, topping đầy đặn gồm giò, bò, đậu, đặc biệt có cả bún ốc, mở cửa 8h00 – 14h00 và 18h00 – 23h00, giá khoảng 35.000 – 50.000 VNĐ.",
+                    "📍 Bún riêu Cô Hoàn: 9 Tuệ Tĩnh, Hai Bà Trưng, bát bún đầy ụ với nhiều topping như giò, bò, riêu cua, bề bề, vịt lộn, nước dùng thanh ngọt chuẩn vị Bắc, mở cửa 6h00 – 14h00 và 16h00 – 21h00, giá khoảng 30.000 – 70.000 VNĐ.",
+                    "📍 Bún riêu 40 Lê Ngọc Hân: 40 Lê Ngọc Hân, Hai Bà Trưng, nổi bật với bún riêu giò bò ăn kèm đậu rán vàng giòn, hương vị đậm đà truyền thống, mở cửa 6h30 – 17h00 (nghỉ Chủ nhật), giá khoảng 30.000 – 55.000 VNĐ. ",
+                    "📍 Bún riêu Cô Hòa: 110B1 Hoàng Tích Trí, Đống Đa, nổi tiếng với bún riêu tóp mỡ sườn sụn, topping đa dạng, nước dùng trong và thơm, mở cửa 6h00 – 22h00, giá khoảng 30.000 – 65.000 VNĐ."
+                ],
+                img: "https://static.vinwonders.com/production/bun-rieu-ngon-ha-noi-6.jpg"
+            },
+            {
+                title: "Chả cá lã vọng",
+                desc: "<p>Không ồn ào hay cầu kỳ phô trương, nhưng chỉ cần một lần đi ngang qua con phố nhỏ và bắt gặp mùi thơm của cá nướng quyện cùng thì là bốc lên nghi ngút, người ta đã khó lòng quên được chả cá Lã Vọng, một trong những món ăn làm nên cái hồn rất riêng của ẩm thực Hà Nội. Xuất phát từ một món ăn gia truyền trong khu phố cổ, chả cá dần trở thành biểu tượng ẩm thực đặc sắc, gắn liền với lịch sử và nếp sống thanh lịch của người Tràng An. Cá lăng tươi được tẩm ướp kỹ lưỡng với các loại gia vị truyền thống, nướng trên than hoa rồi tiếp tục rán trên chảo nóng cùng hành và thì là, tạo nên lớp ngoài vàng ruộm, bên trong mềm ngọt và dậy hương hấp dẫn. Khi thưởng thức, món ăn được kết hợp cùng bún rối, lạc rang giòn, rau thơm và đặc biệt là mắm tôm pha khéo, tất cả hòa quyện tạo nên hương vị béo ngậy mà không hề ngấy, đậm đà nhưng vẫn giữ được nét tinh tế. Không chỉ đơn thuần là một món ăn, chả cá Lã Vọng còn là một trải nghiệm ẩm thực mang đậm bản sắc Hà Nội, khiến bất cứ ai từng nếm thử cũng đều lưu luyến và nhớ mãi.</p>",
+                locations: [
+                    "📍 Chả cá Lã Vọng 14 phố Chả Cá: 14 Chả Cá, Hà Nội, quán hơn 100 năm tuổi, cái nôi của món chả cá Lã Vọng trứ danh, hương vị truyền thống chuẩn gốc, mở cửa 11h00 – 14h00 và 17h00 – 21h00, giá khoảng 350.000 VNĐ/suất.",
+                    "📍 Chả cá Hà Thành: nhiều cơ sở (Nguyễn Văn Huyên, Huỳnh Thúc Kháng, Phó Đức Chính), nổi bật với chả cá lăng tươi tẩm ướp đậm đà, không gian rộng rãi, mở cửa 10h00 – 22h00, giá khoảng 65.000 – 550.000 VNĐ/người.",
+                    "📍 Chả cá Thăng Long: 2D và 6B Đường Thành, quán mang phong cách cổ điển, chả cá vàng ruộm ăn kèm thì là, lạc rang và mắm tôm, mở cửa 10h30 – 13h30 và 17h30 – 20h30, giá khoảng 150.000 – 170.000 VNĐ/người.",
+                    "📍 Chả cá Anh Vũ: 120K1 Giảng Võ, Ba Đình, không gian rộng, phục vụ nhanh, phù hợp tụ tập nhóm, mở cửa 10h30 – 14h30 và 17h00 – 21h30, giá khoảng 20.000 – 150.000 VNĐ/suất."
+                ],
+                img: "https://cdn.tgdd.vn/2022/08/CookRecipe/CookTipsNote/cha-ca-la-vong-la-gi-gia-bao-nhieu-tien-1-kg-va-lam-mon-gi-tipsnote-800x450-5.jpg"
+            },
+            {
+                title: "Chả rươi",
+                desc: "<p>Không phải là món ăn quen thuộc quanh năm, chả rươi Hà Nội lại càng trở nên đặc biệt bởi sự hiếm có khó tìm theo mùa, khiến mỗi lần xuất hiện đều được người sành ăn mong chờ như một thứ quà quý của đất trời. Đây là món ăn mang hương vị rất riêng, không dễ tìm thấy ở nơi khác, bởi rươi chỉ có vào hai vụ chính trong năm, tạo nên nét độc đáo cho ẩm thực Thủ đô. Để làm nên món chả rươi chuẩn vị, người ta phải lựa chọn những con rươi tươi ngon, làm sạch rồi trộn cùng trứng gà, nấm hương, hành lá, hành khô và đặc biệt là vỏ quýt, nguyên liệu tạo nên mùi thơm đặc trưng không thể thiếu. Hỗn hợp ấy được nêm nếm vừa phải rồi rán vàng trên chảo nóng, tạo nên lớp vỏ ngoài giòn nhẹ, bên trong mềm béo và dậy hương hấp dẫn. Khi thưởng thức, thực khách sẽ cảm nhận rõ vị béo ngậy của rươi hòa quyện cùng hương thơm thanh nhẹ của vỏ quýt và gia vị, tất cả tạo nên một tổng thể hài hòa, độc đáo. Chả rươi ngon nhất khi ăn nóng, dùng kèm với cơm hoặc bún, thêm rau sống tươi mát và chấm cùng nước mắm pha chanh ớt để làm dậy lên trọn vẹn hương vị. Không chỉ là một món ăn ngon, chả rươi còn là nét đặc sắc trong văn hóa ẩm thực Hà Nội, khiến bất cứ ai từng thử qua đều khó có thể quên.</p>",
+                locations: [
+                    "📍 Chả rươi Hằng Béo: 244 Lò Đúc, Hà Nội, quán lâu năm nổi tiếng với chả rươi rán vàng ươm, vị đậm đà, ăn kèm nước mắm quất rất đặc trưng, mở cửa 9h00 – 13h30 và 17h00 – 20h30, giá khoảng 25.000 VNĐ/chiếc.",
+                    "📍 Chả rươi Cô Yến: 5B Ô Quan Chưởng, Hoàn Kiếm, quán nhỏ nhưng luôn đông khách, chả rươi thơm nức, rán vàng giòn, mở cửa 10h00 – 22h00, giá khoảng 30.000 – 100.000 VNĐ.",
+                    "📍 Chả rươi Hưng Thịnh: 1 Hàng Chiếu, Hà Nội, quán hơn 30 năm tuổi, nổi bật với nguyên liệu tuyển chọn kỹ và công thức gia truyền, có cả chả nguyên con và chả đánh tan, mở cửa 10h00 – 22h00, giá khoảng 20.000 – 200.000 VNĐ. ",
+                    "📍 Chả rươi Quán Kiến: 100 Tuệ Tĩnh, Hai Bà Trưng, chả rươi kết hợp thịt xay, trứng, thì là, rán vàng thơm, nước chấm đậm đà, mở cửa 9h00 – 22h00, giá khoảng 30.000 – 50.000 VNĐ. "
+                ],
+                img: "https://statics.vinwonders.com/cha-ruoi-ha-noi-1_1678873161.jpg"
+            },
+            {
+                title: "Bún chả",
+                desc: "<p>Nếu phải chọn một món ăn đại diện cho sự tinh tế trong cái giản dị của Hà Nội, thì bún chả chắc chắn là cái tên không thể bỏ qua. Không cần nguyên liệu hiếm, không đòi hỏi kỹ thuật quá cầu kỳ, bún chả chỉ là sự kết hợp của bún, thịt nướng, rau sống và nước chấm, những thứ quen thuộc đến mức ai cũng từng thấy, nhưng lại khiến người ta ăn một lần là nhớ mãi. Cái hay của bún chả không nằm ở sự phô trương mà ở cách người Hà Nội chăm chút từng chi tiết nhỏ, từ việc chọn thịt ba chỉ đủ nạc đủ mỡ, ướp vừa tay để giữ được vị ngọt tự nhiên, rồi nướng trên than hoa cho dậy lên mùi thơm đặc trưng, đến bát nước chấm phải đạt độ thanh nhẹ nhưng vẫn đủ đậm đà để nâng trọn hương vị của thịt. Sợi bún cũng không thể qua loa, phải nhỏ, mềm và trắng, ăn cùng rau sống tươi mát để tạo nên sự cân bằng trong từng miếng. Nghe thì đơn giản, nhưng chính sự chuẩn mực và tinh tế ấy đã biến bún chả thành một trải nghiệm ẩm thực rất riêng của Hà Nội, nơi cái ngon không đến từ sự cầu kỳ mà đến từ sự hài hòa, từ cách người ta biết tiết chế để làm nổi bật những điều tưởng chừng bình thường nhất.</p>",
+                locations: [
+                    "📍 Bún chả Hàng Khoai: 48 Hàng Khoai, Hoàn Kiếm, quán lâu năm, hương vị truyền thống, giá bình dân, thịt nướng đậm đà, mở cửa 6h00 – 15h00, giá khoảng 35.000 – 55.000 VNĐ/suất.",
+                    "📍 Bún chả Quê: 15C ngõ Bà Triệu, Cửa Nam, quán nhỏ nhưng đông khách, chả nướng thấm vị, phục vụ nhanh, mở cửa 10h30 – 12h00, giá khoảng 35.000 – 45.000 VNĐ/suất.",
+                    "📍 Bún chả ngõ 74 Hàng Quạt: 74 Hàng Quạt, Hoàn Kiếm, nằm trong ngõ nhỏ đậm chất Hà Nội, thịt nướng vừa chín, nước chấm chuẩn vị, mở cửa 10h00 – 14h00, giá khoảng 30.000 – 65.000 VNĐ/suất. ",
+                    "📍 Bún chả que tre Tô Hiệu: 102 B8 Tô Hiệu, Nghĩa Đô, quán bình dân, phần ăn đầy đủ, giá rẻ, phù hợp sinh viên, mở cửa 9h00 – 21h00, giá khoảng 30.000 – 40.000 VNĐ/suất. "
+                ],
+                img: "https://i1-dulich.vnecdn.net/2025/03/26/buncha-1742963469-3755-1742978839.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=oOPV6N1Scm_5Z2VTFV6yAw"
+            },
+            {
+                title: "Cháo sườn",
+                desc: "<p>Không cần phải là món ăn cầu kỳ hay sang trọng, chỉ một bát cháo sườn giản dị cũng đủ khiến người ta nhớ mãi về hương vị Hà Nội. Len lỏi trong những con ngõ nhỏ hay xuất hiện nơi góc phố quen thuộc, cháo sườn từ lâu đã trở thành một phần ký ức thân thương của người Hà thành. Bát cháo nóng hổi, sánh mịn được nấu từ gạo xay nhuyễn, quyện cùng vị ngọt thanh của sườn non, ăn kèm những miếng quẩy giòn rụm tạo nên sự hài hòa thú vị giữa mềm và giòn. Chỉ cần thêm chút tiêu cay nồng hay ớt bột là hương vị đã trở nên trọn vẹn, đủ để xua tan cái lạnh buổi sáng hay lấp đầy cơn đói lúc chiều muộn. Từ phiên bản đơn giản chỉ có cháo và quẩy, ngày nay món ăn này đã được biến tấu với nhiều topping như ruốc, thịt băm, xúc xích hay hành phi, nhưng điều giữ chân thực khách vẫn là độ sánh mịn đặc trưng và vị ngọt nhẹ rất riêng. Chính sự mộc mạc mà tinh tế ấy đã giúp cháo sườn trở thành một nét chấm phá quen thuộc trong bức tranh ẩm thực Hà Nội.</p>",
+                locations: [
+                    "📍 Cháo sườn Cô Là: 2A Lý Quốc Sư, Hoàn Kiếm, cháo sánh mịn từ bột gạo, sườn sụn mềm, ruốc giã tay thơm, ăn kèm quẩy và hành phi rất đậm vị, mở cửa 6h30 – 18h30, giá khoảng 15.000 – 40.000 VNĐ. ",
+                    "📍 Cháo sườn Huyền Anh: nhiều cơ sở (Đồng Xuân, Hàng Vải, Minh Khai), nổi tiếng với cháo sườn sụn sần sật, quẩy giòn, bán đến đêm muộn, phù hợp ăn đêm, mở cửa 10h00 – 3h00, giá khoảng 40.000 – 60.000 VNĐ. ",
+                    "📍 Cháo sườn niêu Phan Đình Phùng: 3 Phan Đình Phùng, Hoàn Kiếm, cháo nấu trong niêu giữ nóng lâu, sườn miếng lớn đậm vị, thơm mùi gạo, mở cửa 7h00 – 24h00, giá khoảng 60.000 – 85.000 VNĐ. ",
+                    "📍 Cháo sườn Bà Lợi Còng: 39 Hàng Điếu, Hoàn Kiếm, quán lâu năm nổi tiếng với cháo sườn sụn ruốc, ăn kèm quẩy giòn, hương vị truyền thống, mở cửa 6h30 – 18h00, giá khoảng 20.000 – 35.000 VNĐ. "
+                ],
+                img: "https://hawonkoo.vn/medias/hwks1/images/2023/10/chao-suon-4.jpg"
+            },
+            {
+                title: "Bánh cuốn",
+                desc: "<p>Có những món ăn không cần quá cầu kỳ nhưng vẫn đủ sức khiến người ta nhớ mãi, và bánh cuốn Hà Nội chính là một trong số đó. Dù xuất hiện ở nhiều vùng miền, nhưng chỉ khi thưởng thức tại Thủ đô, người ta mới cảm nhận trọn vẹn được hương vị tinh tế rất riêng của món ăn này. Những lớp bánh mỏng tang, mềm mịn được tráng khéo léo, cuộn bên trong là nhân thịt băm và mộc nhĩ thơm ngậy, ăn kèm chả, hành phi và nước chấm pha chuẩn vị tạo nên sự hài hòa khó cưỡng. Bánh cuốn không chỉ là món ăn quen thuộc mà còn là một phần trong nhịp sống thường ngày của người Hà Nội, từ bữa sáng nhẹ nhàng đến những buổi ăn giản dị mà vẫn đủ đầy hương vị. Sự tinh tế trong cách chế biến và thưởng thức đã giúp bánh cuốn Hà Nội trở thành món ngon nổi tiếng, đủ sức chinh phục cả những thực khách khó tính nhất.</p>",
+                locations: [
+                    "📍 Bánh cuốn Bà Hoành: 66 Tô Hiến Thành, Hà Nội, bánh cuốn Thanh Trì gia truyền, vỏ mỏng mềm, nhân thịt mộc nhĩ đậm đà, nước chấm chuẩn vị, mở cửa 6h00 – 22h00, giá khoảng 30.000 – 60.000 VNĐ. ",
+                    "📍 Bánh cuốn Thụy Khuê: ngõ 29 Thụy Khuê, Hà Nội, quán lâu năm, bánh mỏng mềm, nhân thịt thơm, trình bày tinh tế, mở cửa 7h00 – 21h30, giá khoảng 20.000 – 40.000 VNĐ. ",
+                    "📍 Bánh cuốn Bà Xuân: 16 Dốc Hòe Nhai, Hà Nội, bánh cuốn nóng, chả tự làm, phục vụ nhanh, mở cửa 7h00 – 12h00 và 16h00 – 23h30, giá khoảng 30.000 – 50.000 VNĐ. ",
+                    "📍 Bánh cuốn Phượng: 16 Đào Duy Từ, Hà Nội, bánh cuốn nóng, mềm dai, nhân thịt thơm, nước chấm pha riêng đặc trưng, mở cửa 6h00 – 21h00, giá khoảng 25.000 – 45.000 VNĐ. "
+                ],
+                img: "https://static.vinwonders.com/production/banh-cuon-ha-noi-1.jpg"
+            },
+            {
+                title: "Bánh giò",
+                desc: "<p>Nếu có một món ăn mà chỉ cần nhìn thấy thôi là tự nhiên thấy ấm lòng, thì bánh giò Hà Nội chắc chắn nằm trong danh sách đó. Nhỏ nhỏ xinh xinh, được gói gọn trong lớp lá chuối xanh, bánh giò giống như một món quà giản dị mà thân quen của phố phường. Mở lớp lá ra là mùi thơm nhẹ bay lên, bên trong là lớp bột mềm mịn, núng nính ôm lấy phần nhân thịt băm và mộc nhĩ đậm đà, ăn một miếng là thấy vừa ngon vừa đã. Món này vui ở chỗ ăn kiểu gì cũng hợp, sáng ăn cho chắc bụng, chiều đói làm cái là tỉnh cả người, tối ăn thêm vẫn thấy hợp lý. Thích thì gọi thêm giò, chả, ruốc hay chan chút tương ớt cay cay là ngon hết ý. Không cần sang chảnh hay cầu kỳ, bánh giò cứ thế chinh phục người ta bằng sự gần gũi, khiến ai ăn rồi cũng dễ ghiền lúc nào không hay.</p>",
+                 locations: [
+                    "📍 Bánh giò Đông Các: phố Đông Các, Đống Đa, khu “thiên đường bánh giò” với nhiều quán san sát, bánh chuẩn vị truyền thống, mở cửa 7h00 – 19h00, giá khoảng 10.000 – 15.000 VNĐ/cái.",
+                    "📍 Bánh giò Thụy Khuê (Khủng Long): 5 Thụy Khuê, Tây Hồ, bánh to, vỏ dày mềm, ăn kèm giò chả và dưa góp, mở cửa 6h00 – 20h30, giá khoảng 20.000 – 33.000 VNĐ/cái. ",
+                    "📍 Bánh giò Nguyễn Công Trứ: Hai Bà Trưng, quán vỉa hè bình dân, bánh mềm dẻo, nhân đầy đặn, mở cửa 15h00 – 22h30, giá khoảng 15.000 – 33.000 VNĐ/cái. ",
+                    "📍 Bánh giò Kim Liên: B16 Kim Liên, Hà Nội, suất lớn, có thể đặt giao hàng, ăn kèm giò bò, chả cốm, mở cửa 7h00 – 21h00, giá khoảng 10.000 – 40.000 VNĐ/cái. "
+                ],
+                img: "https://static.vinwonders.com/production/banh-gio-ha-noi-3.jpg"
+            },
+            {
+                title: "Bánh gối",
+                desc: "<p>Chiều Hà Nội mà chưa biết ăn gì thì cứ ghé một quán bánh gối, kiểu gì cũng thấy đúng bài. Những chiếc bánh vàng ươm, nóng hổi vừa vớt khỏi chảo dầu luôn có sức hút rất khó chối từ. Cắn một miếng là nghe lớp vỏ giòn rụm vỡ ra, bên trong là phần nhân đầy đặn với thịt băm, mộc nhĩ, miến và trứng cút béo béo, ăn vừa miệng mà không hề ngấy. Nhưng bánh gối ngon không chỉ nằm ở cái bánh, mà còn ở combo ăn kèm, phải có bát nước mắm chua ngọt, thêm chút ớt cay cay, vài lát đu đủ, cà rốt giòn giòn và rau sống mát lành thì mới tròn vị. Không cần cầu kỳ, chỉ là một món ăn vặt ven đường thôi, nhưng cái cảm giác vừa ăn bánh nóng, vừa tám chuyện cùng bạn bè lại khiến bánh gối trở thành chân ái của những buổi chiều lang thang Hà Nội.</p>",
+                 locations: [
+                    "📍 Bánh gối Hiền Hảo: ngõ 9 Hòe Nhai, Ba Đình, bánh vỏ giòn tan, nhân đầy thịt và trứng cút, nước chấm chua ngọt rất cuốn, mở cửa 8h00 – 19h00, giá khoảng 10.000 VNĐ/chiếc. ",
+                    "📍 Bánh gối cô Hoa: 111B3 Vĩnh Hồ, Đống Đa, quán bình dân nhưng đông khách, bánh to, nhân đậm đà, ăn kèm dưa góp, mở cửa 14h00 – 19h00, giá khoảng 5.000 – 15.000 VNĐ",
+                    "📍 Bánh gối Lê Đại Hành: 25 Lê Đại Hành, Hai Bà Trưng, quán lâu năm, bánh rán vàng đều, ráo dầu, nhân đa dạng, mở cửa 2h00 – 22h00, giá khoảng 20.000 – 55.000 VNĐ.",
+                    "📍 Bánh gối Oanh Oanh: ngách 50 ngõ 612 Đê La Thành, Hà Nội, quán nhỏ trong ngõ nhưng đông khách, bánh giòn, nhân vừa vị, nước chấm ngon, mở cửa 13h30 – 19h00, giá khoảng 8.000 VNĐ. "
+                ],
+                img: "https://statics.vinwonders.com/banh-goi-ha-noi%204_1683991882.jpg"
+            },
+            {
+                title: "Bánh mì",
+                desc: "<p>Nếu có một món ăn vừa nhanh gọn, vừa ăn là thấy Hà Nội, thì bánh mì chắc chắn là lựa chọn không thể thiếu. Không cầu kỳ như nhiều món khác, bánh mì Hà Nội chinh phục người ăn bằng chính sự đơn giản mà đầy tinh tế của mình. Một chiếc bánh với lớp vỏ giòn tan, bên trong là pate gan béo mịn, thêm chút ruốc bông, vài lát giò, chả hay thịt xá xíu, kèm rau mùi và dưa chuột tươi mát, tất cả hòa quyện tạo nên hương vị rất riêng. Điểm đắt giá nằm ở lớp tương ớt cay xé lưỡi, khiến mỗi miếng ăn vừa đậm đà vừa kích thích vị giác. Cái hay của bánh mì Hà Nội là dù nguyên liệu quen thuộc, nhưng cách kết hợp lại vô cùng khéo léo, không quá nhiều nhưng đủ để tạo nên sự cân bằng hoàn hảo. Ngày nay, bánh mì còn được biến tấu đa dạng với nhiều phiên bản như bánh mì thịt nướng, bánh mì mật ong, bánh mì chảo hay bánh mì sốt vang, những chiếc bánh mì truyền thống vẫn luôn giữ một vị trí đặc biệt. Đó không chỉ là món ăn tiện lợi mà còn là một phần nhịp sống của Hà Nội.</p>",
+                locations: [
+                    "📍 Bánh mì phố cổ: 38 Đinh Liệt, Hoàn Kiếm, bánh dài đặc trưng, vỏ giòn quét bơ thơm, nhân thịt nướng đậm đà, mở cửa 7h30 – 24h00, giá khoảng 15.000 – 65.000 VNĐ.",
+                    "📍 Bánh mì bơ mật ong & thịt xiên nướng: 127 Đặng Tiến Đông, Hà Nội, nổi bật với bánh mì thịt nướng và xiên nướng đậm vị, mở cửa 14h00 – 19h00, giá khoảng 30.000 – 50.000 VNĐ.",
+                    "📍 Bánh mì Hoàng Đức: nhiều cơ sở (Chùa Láng, Quang Trung), nổi tiếng với bánh mì xiên nướng thơm, thịt mềm, giá rẻ, mở cửa theo 2 khung giờ, giá khoảng 10.000 – 15.000 VNĐ.",
+                    "📍 Bánh mì dân tổ: 22 Trần Nhật Duật, Hoàn Kiếm, chỉ bán đêm (3h – 8h), nhân trộn đặc biệt nhiều topping, giá khoảng 15.000 – 25.000 VNĐ."
+                ],
+                img: "https://static.vinwonders.com/production/banh-mi-ha-noi-17.jpg"
+            },
+            {
+                title: "Kem Tràng Tiền",
+                desc: "<p>Giữa những ngày hè oi ả của Hà Nội, chẳng cần tìm đâu xa, chỉ cần đứng trước số 35 Tràng Tiền với một que kem trên tay cũng đủ thấy lòng dịu lại, và đó chính là cái chất rất riêng mà Kem Tràng Tiền mang lại. Ra đời từ năm 1958, cái tên ấy không chỉ là một thương hiệu mà còn là cả một phần ký ức gắn liền với bao thế hệ người Hà Nội. Trải qua bao biến động của thời gian, Kem Tràng Tiền vẫn giữ được sức hút đặc biệt, như một lời nhắc quen thuộc rằng “đến Hà Nội mà chưa ăn kem Tràng Tiền thì coi như chưa trọn vẹn”. Những que kem giản dị với hương vị truyền thống như cốm, đậu xanh, dừa hay cacao không chỉ mát lạnh mà còn mang theo vị ngọt thanh rất đặc trưng, khiến người ta ăn một lần là nhớ mãi. Dù ngày nay thương hiệu đã có những thay đổi để phù hợp với thời đại, từ hình ảnh đến cách tiếp cận, nhưng cái hồn xưa, cái cảm giác đứng xếp hàng mua kem rồi vừa ăn vừa dạo quanh Hồ Gươm vẫn còn nguyên vẹn. Có lẽ vì thế mà Kem Tràng Tiền không chỉ là một món ăn giải nhiệt, mà còn là một phần văn hóa rất riêng của Hà Nội, nơi mỗi que kem đều gợi lại những ký ức thân quen và những khoảnh khắc bình dị mà đáng nhớ.</p>",
+                locations: [
+                    "📍 Cửa hàng chính: Số 35 phố Tràng Tiền, quận Hoàn Kiếm, Hà Nội, mở cửa từ 8:00 đến 23:00 tất cả các ngày trong tuần. Mức giá khá bình dân, dao động từ 10.000 đến 50.000 VNĐ tùy loại, phù hợp với nhiều đối tượng khách hàng."
+                ],
+                img: "https://owa.bestprice.vn/images/articles/uploads/top-15-mon-ngon-ha-noi-an-mot-lan-nho-ca-doi-6065871012fe8.jpg"
+            },
+            {
+                title: "Chè",
+                desc: "<p>Nếu Hà Nội có một thế giới ngọt ngào riêng, thì đó chắc chắn là những gánh chè giản dị mà đầy mê hoặc. Không cần cầu kỳ về hình thức, chè Hà Nội chinh phục người ăn bằng chính vị ngọt thanh tự nhiên và sự tinh tế trong cách kết hợp nguyên liệu. Từ hạt sen bùi bùi, cùi bưởi giòn sần sật đến đỗ xanh, đỗ đen hay dừa béo nhẹ, mỗi bát chè đều mang một hương vị riêng, ăn vào là thấy mát cả người. Cái thú của chè Hà Nội không chỉ nằm ở vị ngon mà còn ở cảm giác ngồi bên quán nhỏ, vừa ăn vừa chuyện trò, chậm rãi tận hưởng. Mỗi loại chè là một trải nghiệm khác nhau, lúc thanh nhẹ, lúc đậm đà, nhưng đều để lại dư vị rất dễ nhớ. Vì thế, nếu có dịp ghé thăm Thủ đô, đừng quên dành thời gian khám phá những quán chè ngon, bởi đôi khi chỉ một bát chè thôi cũng đủ khiến chuyến đi trở nên trọn vẹn hơn.</p>",
+                locations: [
+                    "📍 Chè khúc bạch Suvy: 33 Quang Trung, Hoàn Kiếm, nổi bật với khúc bạch phô mai béo ngậy, topping đầy đặn, mở cửa 14h00 – 21h00, giá khoảng 25.000 VNĐ.",
+                    "📍 Chè 117 Đội Cấn: 117 Đội Cấn, Hà Nội, chè thập cẩm ngon – bổ – rẻ, mở cửa 9h00 – 22h00, giá khoảng 10.000 – 30.000 VNĐ.",
+                    "📍 Chè Gỗ: 9 Trần Phú, Hà Nội, quán nổi tiếng với chè khúc bạch long nhãn thanh mát, luôn đông khách, mở cửa 11h00 – 16h30 và 19h30 – 22h30, giá khoảng 10.000 – 30.000 VNĐ.",
+                    "📍 Chè bưởi Đê La Thành: 491 Đê La Thành, Hà Nội, nổi bật với cùi bưởi giòn, nước cốt dừa béo, mở cửa cả ngày, giá khoảng 15.000 VNĐ."
+                ],
+                img: "https://simg.zalopay.com.vn/zlp-website/assets/quan_che_ngon_ha_noi_10_161d88f7ea.jpg"
+            },
+            {
+                title: "Cốm làng Vòng",
+                desc: "<p>Nhắc đến mùa thu Hà Nội, người ta không chỉ nhớ đến lá vàng hay gió se lạnh, mà còn nhớ đến hương cốm làng Vòng thoang thoảng, nhẹ mà đủ khiến lòng người xao xuyến. Không ồn ào như những món ăn khác, cốm mang một vẻ đẹp rất riêng, giản dị nhưng tinh tế, như chính nhịp sống của người Hà Nội. Những hạt cốm xanh non, dẻo mềm, thơm mùi lúa mới, gói trong lá sen thoảng hương dịu nhẹ, chỉ cần mở ra thôi là đã thấy cả mùa thu ùa về. Ăn cốm không phải để no mà là để cảm nhận, để chậm lại một chút giữa phố phường đông đúc. Có thể ăn riêng, hoặc kết hợp với chuối chín, dừa nạo để tăng thêm vị bùi béo, tất cả tạo nên một trải nghiệm rất riêng của thu Hà Nội. Và nếu muốn thưởng thức đúng vị cốm làng Vòng chuẩn, bạn có thể ghé qua những địa chỉ uy tín, nơi vẫn giữ được cách làm truyền thống và hương vị nguyên bản, để cảm nhận trọn vẹn cái tinh túy của đất trời Thủ đô.</p>",
+                locations: [
+                    "📍 Cốm làng Vòng Bà Cận: 19 ngõ 85 Xuân Thủy, Cầu Giấy, nổi tiếng với cốm tươi gói lá sen thơm dịu, giữ nguyên hương vị truyền thống, mở cửa 6h00 – 23h00, giá khoảng 8.000 – 250.000 VNĐ.",
+                    "📍 Cốm Vòng Cô Mận: 21 Trương Công Giai, Cầu Giấy, nổi bật với nhiều món từ cốm như xôi, bánh, cốm trộn, giữ màu tự nhiên truyền thống, mở cửa 6h00 – 23h00, giá khoảng 5.000 – 250.000 VNĐ.",
+                    "📍 Cốm Thu Huệ: 16 Mễ Trì Thượng, Nam Từ Liêm, cốm làm thủ công, đóng gói hút chân không tiện lợi, nổi bật với bánh cốm và xôi cốm, mở cửa 7h00 – 21h00, giá khoảng 5.000 – 280.000 VNĐ. ",
+                    "📍 Cốm làng Vòng Bà Hoản: ngõ 63 Xuân Thủy, Cầu Giấy, cốm gói lá sen hai lớp, giữ độ dẻo và màu xanh tự nhiên, menu đa dạng, mở cửa 6h00 – 23h00, giá khoảng 5.000 – 320.000 VNĐ."
+                ],
+                img: "https://cdn.tgdd.vn/Files/2023/09/06/1545961/thu-ha-noi-thuong-thuc-com-chuan-lang-vong-voi-7-dia-chi-nen-thu-202309061125383497.jpg"
+            },
+            {
+                title: "Cà phê",
+                desc: "<p>Hà Nội không chỉ là nơi để uống cà phê, mà còn là nơi để thưởng thức cà phê theo đúng nghĩa. Từ những ly phin nhỏ giọt chậm rãi ngày xưa, đến nay, văn hóa cà phê Thủ đô đã khoác lên mình một diện mạo mới với hàng loạt quán mang phong cách sáng tạo và đầy cá tính. Mỗi quán là một không gian riêng, mỗi ly cà phê là một câu chuyện, từ hương thơm đậm đà của những hạt arabica được rang xay kỹ lưỡng đến cách pha chế mới lạ khiến người ta vừa tò mò vừa thích thú. Điều thú vị là dù có thay đổi thế nào, cà phê Hà Nội vẫn giữ được cái chất riêng, vừa sâu lắng, vừa chậm rãi, rất hợp để ngồi ngắm phố phường trôi qua. Lang thang qua những con phố cổ, tìm một góc quán nhỏ, gọi một ly cà phê và ngồi thật lâu, đó không chỉ là một thói quen mà còn là một trải nghiệm rất Hà Nội mà ai đến đây cũng nên thử ít nhất một lần.</p>",
+                locations: [
+                    "📍 Cafe Giảng: 39 Nguyễn Hữu Huân, Hoàn Kiếm, cái nôi của cà phê trứng từ năm 1946, hương vị béo ngậy đặc trưng, mở cửa 7h00 – 22h00, giá khoảng 25.000 – 50.000 VNĐ.",
+                    "📍 Cafe Ban Công: 2 Đinh Liệt, Hoàn Kiếm, phong cách hoài cổ, không gian đậm chất Hà Nội xưa, mở cửa 7h00 – 23h00, giá khoảng 50.000 – 75.000 VNĐ.",
+                    "📍 All Day Coffee: 37 Quang Trung, Hoàn Kiếm, kết hợp giữa hiện đại và cổ điển, có rang xay tại chỗ, mở cửa 7h00 – 23h00, giá khoảng 40.000 – 70.000 VNĐ"
+                ],
+                img: "https://toantienhousing.vn/upload/image/ca-phe-trung-thuc-uong-nhat-dinh-phai-thu-trong-pho-co-ha-noi-1.jpg"
+            }
+        ];
+        const listContainer = document.getElementById('destinations-list');
+        const searchInput = document.getElementById('searchInput');
+
+
+
+
+        // Debounced search for real-time performance
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(performSearch, 300);
+        });
+        const modalOverlay = document.getElementById('modalOverlay');
+
+
+
+
+        function getExcerpt(htmlStr) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = htmlStr;
+            return tmp.textContent.substring(0, 200) + '...';
+        }
+
+
+
+
+        foodData.forEach((food, index) => {
+            const locations = food.locations || '';
+            const locationHtml = locations ? `<div class="dish-location" style="font-size: 14px; color: var(--text-gray); margin-bottom: 10px; font-style: italic;">
+                📍 Địa điểm nổi tiếng: ${locations}
+            </div>` : '';
+            const num = (index + 1).toString().padStart(2, '0');
+           
+            const item = document.createElement('div');
+            item.className = 'dest-item';
+           
+            item.innerHTML = `
+                <div class="dest-image-wrap">
+                    <img src="${food.img}" alt="${food.title}">
+                </div>
+                <div class="dest-content">
+                    <div class="dest-index">${num}</div>
+                    <h3 class="dest-name">${food.title}</h3>
+                    <div class="dest-excerpt">${getExcerpt(food.desc)}</div>
+
+
+
+
+                    <button class="read-more-btn" onclick="openModal(${index})">Xem chi tiết</button>
+                </div>
+            `;
+            listContainer.appendChild(item);
+        });
+
+
+
+
+function openModal(index) {
+            document.getElementById('modalImg').src = foodData[index].img;
+            document.getElementById('modalTitle').innerText = foodData[index].title;
+            let modalContent = foodData[index].desc;
+            if (foodData[index].locations && foodData[index].locations.length > 0) {
+                modalContent += '<div class="dish-locations" style="margin-top: 25px; padding: 20px; background: rgba(255,107,0,0.05); border-radius: 12px; border-left: 4px solid var(--primary);">';
+                modalContent += '<h4 style="color: var(--modal-title); margin-bottom: 15px; font-size: 20px;">📍 Địa điểm nổi tiếng</h4>';
+                foodData[index].locations.forEach(location => {
+                    modalContent += `<div style="margin-bottom: 12px; line-height: 1.6;">${location}</div>`;
+                });
+                modalContent += '</div>';
+            }
+            document.getElementById('modalBody').innerHTML = modalContent;
+            // Add ratings section
+            document.getElementById('modalBody').innerHTML = modalContent;
+           
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+
+
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+
+
+
+        window.onclick = function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        }
+
+
+
+
+        // General Reviews Functionality
+        const generalReviewsList = document.getElementById('generalReviewsList');
+        const generalReviewText = document.getElementById('generalReviewText');
+        const submitReviewBtn = document.getElementById('submitReviewBtn');
+
+
+
+
+        function loadGeneralReviews() {
+            const reviews = JSON.parse(localStorage.getItem('hanoiGeneralReviews') || '[]');
+            generalReviewsList.innerHTML = '';
+            if (reviews.length === 0) {
+                generalReviewsList.innerHTML = '<div class="no-reviews">Chưa có đánh giá nào. Hãy là người đầu tiên chia sẻ! 😊</div>';
+                return;
+            }
+            reviews.slice(-10).reverse().forEach(review => {
+                const reviewEl = document.createElement('div');
+                reviewEl.className = 'review-item';
+                reviewEl.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-avatar">${review.name.charAt(0).toUpperCase()}</div>
+                        <div class="review-meta">
+                            <h4>${review.name}</h4>
+                            <div class="review-date">${new Date(review.date).toLocaleDateString('vi-VN')}</div>
+                        </div>
+                    </div>
+                    <div class="review-text">${review.text}</div>
+                `;
+                generalReviewsList.appendChild(reviewEl);
+            });
+        }
+
+
+
+
+        submitReviewBtn.addEventListener('click', function() {
+            const text = generalReviewText.value.trim();
+            if (text && text.length >= 10) {
+                const name = prompt('Nhập tên của bạn:') || 'Ẩn danh';
+                if (name) {
+                    const reviews = JSON.parse(localStorage.getItem('hanoiGeneralReviews') || '[]');
+                    reviews.push({
+                        name: name,
+                        text: text,
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('hanoiGeneralReviews', JSON.stringify(reviews));
+                    generalReviewText.value = '';
+                    loadGeneralReviews();
+                }
+            } else {
+                alert('Vui lòng viết đánh giá ít nhất 10 ký tự!');
+            }
+        });
+
+
+
+
+        generalReviewText.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                submitReviewBtn.click();
+            }
+        });
+
+
+
+
+        loadGeneralReviews();
+
+
+
+
+        // Search functionality
+
+
+
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            performSearch();
+        });
+
+
+
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const items = document.querySelectorAll('.dest-item');
+            let visibleCount = 0;
+
+
+
+
+            items.forEach(item => {
+                const title = item.querySelector('.dest-name').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+
+
+
+            let noResults = document.querySelector('.no-results');
+            if (visibleCount === 0 && query) {
+                if (!noResults) {
+                    noResults = document.createElement('div');
+                    noResults.className = 'no-results';
+                    noResults.textContent = 'Không tìm thấy món ăn nào phù hợp!';
+                    listContainer.parentNode.insertBefore(noResults, listContainer);
+                }
+            } else {
+                if (noResults) noResults.remove();
+            }
+        }
+    </script>
+     <!-- FOOTER -->
+    <footer class="footer" id="footer">
+      <link rel="stylesheet" href="footer.css">
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-col">
+                <h3 class="footer-title">Go Hanoi</h3>
+                <p>Đồng hành cùng bạn khám phá vẻ đẹp Hà Nội đích thực.</p>
+                <div class="social-icons">
+                    <a href="#" class="icon-fb"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon-ins"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="icon-ytb"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="icon-tk"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+
+            <div class="footer-col" id="contact">
+                <h3 class="footer-title">Liên Hệ</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> 024 123 4567</li>
+                    <li><i class="fas fa-envelope"></i> gohanoi@gmail.vn</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 36 Hàng Bạc, Hoàn Kiếm, Hà Nội</li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h3 class="footer-title">Đăng Ký Nhận Tin</h3>
+                <p>Cập nhật thông tin và nhận ưu đãi sớm nhất!</p>
+                <form class="subscribe-form" id="subscribeForm" >
+                    <input type="email" placeholder="Email của bạn" required>
+                    <button type="submit">Đăng ký</button>
+                </form>
+                <div id="successMessage" style="display: none; color: #4CAF50; margin-top: 10px; font-weight: bold; font-size: 14px;">
+                     <i class="fas fa-check-circle"></i> Đã đăng ký thành công!
+                </div>
+            </div>
+          </div>
+        <hr class="footer-divider">
+
+
+        <div class="footer-bottom">
+          <script src="/footerscript.js" defer></script>
+            <p class="copyright">© 2026 Go Hanoi. Tất cả quyền được bảo lưu.</p>
+            <div class="bottom-links" id="phanhoi">
+                <a href="mailto:gohanoi@gmail.vn?subject=Phản hồi từ khách hàng&body=Xin chào Go Hanoi, tôi có góp ý sau:">Phản hồi</a>
+                <a href="https://drive.google.com/file/d/1pEXiyZ1J0VpqkL7Y8cqW2OwWvWpoGN-C/view" target="_blank">Điều khoản</a></div></div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

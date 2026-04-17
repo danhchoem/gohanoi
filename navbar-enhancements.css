@@ -1,0 +1,152 @@
+/* Navbar Enhancements for Go Hanoi - Search, Lang, Weather */
+
+
+/* Right nav utilities - reuse/adapt search.css */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+
+#home-view .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+#home-view .nav-menu {
+  flex: 1;
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  justify-content: center;
+  margin: 0 2rem;
+}
+
+
+#home-view .search-wrapper {
+  position: relative;
+  background: #f1f5f9;
+  border-radius: 25px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+  width: 40px;
+  overflow: hidden;
+}
+
+
+#home-view .search-wrapper.active,
+#home-view .search-wrapper:focus-within {
+  width: 250px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+#home-view .search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 8px 10px;
+  font-size: 14px;
+  width: 180px;
+}
+
+
+#home-view .search-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s;
+}
+
+
+#home-view .search-btn:hover {
+  color: #DC2626;
+}
+
+
+/* Lang switcher */
+.lang-switcher {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #64748b;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.lang-switcher:hover {
+  background: #e2e8f0;
+  color: #DC2626;
+  transform: rotate(180deg);
+}
+
+
+.en .lang-vn { display: none; }
+.vn .lang-en { display: none; }
+
+
+/* Weather widget */
+.weather-widget {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+
+.weather-icon {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+
+.weather-temp {
+  font-weight: 600;
+}
+
+
+.weather-desc {
+  opacity: 0.9;
+  font-size: 12px;
+}
+
+
+/* Responsive - stack right items on mobile */
+@media (max-width: 768px) {
+  .nav-right {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+ 
+  .nav-menu {
+    order: 2;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+
+/* Scoped to #home-view to avoid dest-view conflict */
