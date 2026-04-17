@@ -393,7 +393,7 @@ img {
                 <!-- Menu Desktop -->
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link active">Trang chủ</a>
+                        <a ="#home" class="nav-link active">Trang chủ</a>
                     </li>
                      <li class="nav-item">
                         <a href="#History&Cuture" class="nav-link">Lịch sử & Văn hóa</a>
@@ -409,7 +409,7 @@ img {
                     </li>
                     <li class="search-box-container" id="search-wrapper">
                     <li class="search-wrapper" id="search-wrapper">
-                         <link rel="stylesheet" href="search.css">
+                         <link rel="stylesheet" href="./search.css">
                          <script src="/search.js" defer> </script>
                          <input type="text" id="search-input" placeholder="Tìm kiếm..." class="search-input">
                          <button class="search-submit" id="search-btn">
@@ -417,8 +417,8 @@ img {
                     </li>
                     </li>
                     <li class="login" id="login">
-                      <link rel="stylesheet" href="login_icon.css">
-                      <a href="dang-nhap-dang-ky.html" class="login" id="user-profile"> <i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i></a>
+                      <link rel="stylesheet" href="./login_icon.css">
+                      <a href="./dang-nhap-dang-ky.html" class="login" id="user-profile"> <i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i></a>
                     </li>
                    
                    
@@ -667,7 +667,7 @@ img {
    <section class="featured-locations" style="font-family: helvetica;" id="locations1">
     <h2 class="section-title"  style="font-size: 50px; font-family: Tahoma;"><b>Địa Điểm Nổi Bật</b></h2>
     <div class="location-grid-container">
-        <link rel="stylesheet" href="địa điểm.css">
+        <link rel="stylesheet" href="./địa điểm.css">
         <div class="grid-item item-ho-guom" style="background-image: url(https://statics.vinwonders.com/ho-hoan-kiem-21_1688885249.jpg);">
             <div class="card-content">
                 <span class="location-tag tag-orange">TRUNG TÂM</span>
@@ -697,7 +697,7 @@ img {
                 <i class="fas fa-map-marked-alt"></i>
                 <h3>Khám Phá Thêm</h3>
                 <p>Xem chi tiết toàn bộ 14+ địa danh tuyệt đẹp <br>không thể bỏ lỡ tại Hà Nội</p>
-                <a href="trang-dia-diem.html" class="btn-next"><i class="fas fa-arrow-right" style="font-size: 30px;"></i></a>
+                <a href="./trang-dia-diem.html" class="btn-next"><i class="fas fa-arrow-right" style="font-size: 30px;"></i></a>
             </div>
         </div>
 
@@ -735,13 +735,13 @@ img {
                 </div>
             </div>
         </div>
-        <br> <p style="text-align: center;"> <a href="ẩm thực.html" class="cta-button"><i class="fa-solid fa-utensils"></i>Xem thêm 12 món ngon</a></p>
+        <br> <p style="text-align: center;"> <a href="./ẩm thực.html" class="cta-button"><i class="fa-solid fa-utensils"></i>Xem thêm 12 món ngon</a></p>
     </section>
 
 
     <!-- FOOTER -->
     <footer class="footer" id="footer">
-      <link rel="stylesheet" href="footer.css">
+      <link rel="stylesheet" href="./footer.css">
     <div class="footer-container">
         <div class="footer-main">
             <div class="footer-col">
@@ -815,7 +815,7 @@ auth.onAuthStateChanged((user) => {
     // Original logout state
     profileA.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i><i class="fa-solid fa-user-lock"></i>';
     profileA.title = ''; // Remove tooltip
-    profileA.href = 'dang-nhap-dang-ky.html';
+    profileA.href = './dang-nhap-dang-ky.html';
     profileA.onclick = null;
     loginLi.classList.remove('logged-in');
   }
